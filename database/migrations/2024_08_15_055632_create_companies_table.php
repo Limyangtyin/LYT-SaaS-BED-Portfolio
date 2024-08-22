@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('city')->index();
             $table->string('state')->index();
             $table->string('country')->index();
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }
