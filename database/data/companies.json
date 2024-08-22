@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Company 1",
+        "city": "Perth",
+        "state": "WA",
+        "country": "AUS",
+        "logo": null
+    },
+    {
+        "name": "Company 2",
+        "city": "Melbourne",
+        "state": "VIC",
+        "country": "AUS",
+        "logo": null
+    },
+    {
+        "name": "Company 3",
+        "city": "Sydney",
+        "state": "NSW",
+        "country": "AUS",
+        "logo": null
+    }
+]

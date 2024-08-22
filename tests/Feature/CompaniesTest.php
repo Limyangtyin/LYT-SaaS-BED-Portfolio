@@ -49,7 +49,6 @@ it('can fetch a company', function () {
         'success' => true,
         'message' => 'A company retrieved successfully',
         'data' => [
-            [
                 'id' => 1,
                 'name' => 'Company 1',
                 'city' => 'Perth',
@@ -58,13 +57,10 @@ it('can fetch a company', function () {
                 'logo' => null,
                 'created_at' => '2024-07-01T00:00:00.000000Z',
                 'updated_at' => '2024-07-01T00:00:00.000000Z',
-            ]
         ]
     ];
 
-    $company = $data['data'];
-
-    Companies::create($company);
+    $company = Companies::create($data['data']);
 
     $response = $this->getJson("/api/v1/companies/{$company->id}");
 
@@ -77,7 +73,6 @@ it('can add a new company', function () {
         'success' => true,
         'message' => 'New company added successfully',
         'data' => [
-            [
                 'id' => 3,
                 'name' => 'Company 3',
                 'city' => 'Sydney',
@@ -86,13 +81,10 @@ it('can add a new company', function () {
                 'logo' => null,
                 'created_at' => '2024-07-01T00:00:00.000000Z',
                 'updated_at' => '2024-07-01T00:00:00.000000Z',
-            ]
         ]
     ];
 
     $company = $data['data'];
-
-    Companies::create($company);
 
     $response = $this->postJson('/api/v1/companies', $company);
 
@@ -104,7 +96,6 @@ it('can edit a company data', function () {
        'success' => true,
        'message' => "Company's data has been updated successfully",
        'data' => [
-           [
            'id' => 3,
            'name' => 'Company 3',
            'city' => 'Brisbane',
@@ -113,20 +104,21 @@ it('can edit a company data', function () {
            'logo' => null,
            'created_at' => '2024-07-01T00:00:00.000000Z',
            'updated_at' => '2024-07-01T00:00:00.000000Z',
-           ]
        ]
    ];
 
-   $originaldata = Companies::create([
+   $originaldata = Companies::create($data['data']);
+
+   $updatedata = [
        'id' => 3,
        'name' => 'Company 3',
        'city' => 'Sydney',
        'state' => 'NSW',
        'country' => 'AUS',
        'logo' => null,
-   ]);
+   ];
 
-   $response = $this->putJson("/api/v1/companies/{$originaldata->id}", $data);
+   $response = $this->putJson("/api/v1/companies/{$originaldata->id}", $updatedata);
 
    $response->assertStatus(200)->assertJson($data);
 
