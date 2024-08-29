@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Companies;
-use Faker\Core\File;
+use App\Models\Company;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class CompaniesSeeder extends Seeder
 {
@@ -14,20 +14,8 @@ class CompaniesSeeder extends Seeder
      */
     public function run(): void
     {
-        Companies::truncate();
+        Company::truncate();
 
-        $json = File::get('database/data/companies.json');
-
-        $companies = json_decode($json);
-
-        foreach ($companies as $company) {
-            Companies::create([
-                'name' => $company->name,
-                'city' => $company->city,
-                'state' => $company->state,
-                'country' => $company->country,
-                'logo' => $company->logo,
-            ]);
-        }
+        Company::factory()->count(10)->create();
     }
 }
