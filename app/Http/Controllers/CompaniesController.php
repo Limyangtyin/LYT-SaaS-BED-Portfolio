@@ -70,7 +70,7 @@ class CompaniesController extends Controller
             $company->update($request->all());
 
             return ApiResponseClass::sendResponse(
-                $company->fresh(), "Company's data has been updated successfully"
+                $company, "Company's data has been updated successfully"
             );
             } catch (ModelNotFoundException $e) {
             return response()->json([
@@ -86,6 +86,18 @@ class CompaniesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try{
+            $company = Company::findOrFail($id);
+            $company->delete();
+            return ApiResponseClass::sendResponse(
+                $company, "A company has been removed successfully"
+            );
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Company not found',
+                'data' => []
+            ], 404);
+        }
     }
 }

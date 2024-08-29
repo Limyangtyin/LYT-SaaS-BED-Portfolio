@@ -75,6 +75,23 @@ it('can edit a company data', function () {
 
 });
 
+it('can delete a company', function () {
+    $company = Company::factory()->create();
+
+    $data = [
+        'success' => true,
+        'message' => "A company has been removed successfully",
+        'data' => []
+    ];
+
+    $response = $this->deleteJson("/api/v1/companies/{$company->id}");
+
+    $response->assertStatus(200)->assertJson($data);
+
+});
+
+
+
 // ToDo: Soft-delete and Soft-undo test case
 
 

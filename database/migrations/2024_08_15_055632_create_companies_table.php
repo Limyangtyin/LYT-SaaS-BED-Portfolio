@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('country')->index();
             $table->string('logo')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
