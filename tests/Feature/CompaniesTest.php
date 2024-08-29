@@ -90,13 +90,25 @@ it('can delete a company', function () {
 
 });
 
+it('can restore a company', function () {
+    $company = Company::factory()->create();
 
+    $deletedata = [
+        'success' => true,
+        'message' => "A company has been removed successfully",
+        'data' => []
+    ];
 
-// ToDo: Soft-delete and Soft-undo test case
+    $restoredata = [
+        'success' => true,
+        'message' => "A company has been restore successfully",
+        'data' => $company->toArray()
+    ];
 
+    $response = $this->deleteJson("/api/v1/companies/{$company->id}");
+    $response->assertStatus(200)->assertJson($deletedata);
 
+    $response = $this->putJson("/api/v1/companies/{$company->id}");
+    $response->assertStatus(200)->assertJson($restoredata);
 
-
-
-
-
+});

@@ -15,4 +15,5 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('companies', [CompaniesController::class, 'store'])->name('company.store');
     Route::put('companies/{id}', [CompaniesController::class, 'update'])->name('company.update');
     Route::delete('companies/{id}', [CompaniesController::class, 'destroy'])->name('company.delete');
+    Route::put('companies/{id}', [CompaniesController::class, 'restore'])->name('company.restore');
 });

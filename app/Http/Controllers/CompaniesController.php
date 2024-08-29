@@ -84,7 +84,7 @@ class CompaniesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
         try{
             $company = Company::findOrFail($id);
@@ -96,6 +96,29 @@ class CompaniesController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Company not found',
+                'data' => []
+            ], 404);
+        }
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * Restore the specified resource from storage.
+     */
+    public function restore(int $id)
+    {
+        try{
+            $company = Company::withTrashed()->findorfail($id);
+            $company->restore();
+            return ApiResponseClass::sendResponse(
+                $company, "A company has been restore successfully"
+            );
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Company not found in trash',
                 'data' => []
             ], 404);
         }
