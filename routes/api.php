@@ -14,6 +14,6 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('companies/{id}', [CompaniesController::class, 'show'])->name('company.show');
     Route::post('companies', [CompaniesController::class, 'store'])->name('company.store');
     Route::put('companies/{id}', [CompaniesController::class, 'update'])->name('company.update');
-    Route::delete('companies/{id}', [CompaniesController::class, 'destroy'])->name('company.delete');
-    Route::put('companies/{id}', [CompaniesController::class, 'restore'])->name('company.restore');
+    Route::delete('companies/{id}/delete', [CompaniesController::class, 'destroy'])->name('company.delete');
+    Route::put('companies/{id}/restore', [CompaniesController::class, 'restore'])->name('company.restore');
 });

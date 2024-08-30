@@ -73,6 +73,8 @@ it('can edit a company data', function () {
 
    $response->assertStatus(200)->assertJson($data);
 
+   $this->assertDatabaseHas('companies', $updatedData);
+
 });
 
 it('can delete a company', function () {
@@ -84,7 +86,7 @@ it('can delete a company', function () {
         'data' => []
     ];
 
-    $response = $this->deleteJson("/api/v1/companies/{$company->id}");
+    $response = $this->deleteJson("/api/v1/companies/{$company->id}/delete");
 
     $response->assertStatus(200)->assertJson($data);
 
@@ -105,10 +107,10 @@ it('can restore a company', function () {
         'data' => $company->toArray()
     ];
 
-    $response = $this->deleteJson("/api/v1/companies/{$company->id}");
+    $response = $this->deleteJson("/api/v1/companies/{$company->id}/delete");
     $response->assertStatus(200)->assertJson($deletedata);
 
-    $response = $this->putJson("/api/v1/companies/{$company->id}");
+    $response = $this->putJson("/api/v1/companies/{$company->id}/restore");
     $response->assertStatus(200)->assertJson($restoredata);
 
 });
