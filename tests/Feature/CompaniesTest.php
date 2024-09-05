@@ -10,7 +10,7 @@ uses(RefreshDatabase::class);
 testTime()->freeze('2024-07-01 00:00:00');
 
 it('can fetch all companies', function () {
-    $companies = Company::factory()->count(2)->create();
+    $companies = Company::factory(2)->create();
 
     $data = [
         'success' => true,

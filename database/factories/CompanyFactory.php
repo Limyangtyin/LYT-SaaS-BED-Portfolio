@@ -23,7 +23,7 @@ class CompanyFactory extends Factory
         return [
             'name' => $this->faker->company(),
             'city' => $this->faker->city(),
-            'state' => $this->faker->state(),
+            'state' => $this->faker->word(),
             'country' => $this->faker->country(),
             'logo' => $this->faker->imageUrl(),
         ];
