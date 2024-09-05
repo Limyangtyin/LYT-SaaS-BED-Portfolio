@@ -13,7 +13,20 @@ return new class extends Migration
     {
         Schema::create('positions', function (Blueprint $table) {
             $table->id();
+            $table->timestamp('advertising_start_date');
+            $table->timestamp('advertising_end_date');
+            $table->string('position_title')->index('title');
+            $table->string('position_description')->index('description');
+            $table->string('position_keywords')->index('keyword');
+            $table->float('minimum_salary');
+            $table->float('maximum_salary');
+            $table->string('salary_currency')->default('AUD');
+            $table->foreignId('company_id')->constrained('companies')->cascadeOnDelete();
+            $table->string('benefits')->index();
+            $table->string('requirements')->index();
+            $table->enum('position_type', ['permanent', 'contract', 'part-time', 'casual', 'internship']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
