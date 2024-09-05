@@ -17,7 +17,7 @@ class PositionsController extends Controller
     {
         $positions = Position::all();
         return ApiResponseClass::sendResponse(
-            $positions, "Position retrieved successfully"
+            $positions, "Positions retrieved successfully"
         );
     }
 

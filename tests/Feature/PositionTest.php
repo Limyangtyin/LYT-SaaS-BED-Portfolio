@@ -39,7 +39,6 @@ it('can fetch a position', function () {
 
 
 it('can add a new position', function () {
-    // Create one company instance without saving
     $position = Position::factory()->make();
 
     $data = [
@@ -57,12 +56,12 @@ it('can edit a position data', function () {
     $position = Position::factory()->create();
 
     $updatedData = [
-        'position title' => 'Position 1',
-        'position description' =>  'Do this... and do that...',
-        'position keywords' => 'P1',
-        'minimum salary' => 2000,
-        'maximum salary' => 20000,
-        'salary currency' => 'AUD'
+        'position_title' => 'Position 1',
+        'position_description' =>  'Do this... and do that...',
+        'position_keywords' => 'PPP',
+        'minimum_salary' => 2000,
+        'maximum_salary' => 20000,
+        'salary_currency' => 'AUD'
     ];
 
     $data = [
@@ -71,7 +70,7 @@ it('can edit a position data', function () {
         'data' => array_merge($position->toArray(), $updatedData, ['id' => $position->id])
     ];
 
-    $response = $this->putJson("/api/v1/positions/{$position->id}", $updatedData);
+    $response = $this->putJson("/api/v1/positions/{$position->id}/update", $updatedData);
 
     $response->assertStatus(200)->assertJson($data);
 
