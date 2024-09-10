@@ -39,7 +39,11 @@ it('can fetch a position', function () {
 
 
 it('can add a new position', function () {
-    $position = Position::factory()->make();
+    $company = \App\Models\Company::factory()->create();
+
+    $position = Position::factory()->make([
+        'company_id' => $company->id,
+    ]);
 
     $data = [
         'success' => true,

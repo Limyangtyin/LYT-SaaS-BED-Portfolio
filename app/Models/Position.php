@@ -12,16 +12,18 @@ class Position extends Model
     use SoftDeletes;
 
     protected $fillable = [
-      'position title',
-      'position description',
-      'position keywords',
-      'minimum salary',
-      'maximum salary',
-      'salary currency',
-      'company',
-      'benefits',
-      'requirements',
-      'position type'
+        'advertising_start_date',
+        'advertising_end_date',
+        'position_title',
+        'position_description',
+        'position_keywords',
+        'minimum_salary',
+        'maximum_salary',
+        'salary_currency',
+        'company_id',
+        'benefits',
+        'requirements',
+        'position_type'
     ];
 
 }
