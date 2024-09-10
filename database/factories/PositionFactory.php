@@ -20,7 +20,6 @@ class PositionFactory extends Factory
      */
     public function definition(): array
     {
-
         return [
             'advertising_start_date' => $this->faker->date(),
             'advertising_end_date' => $this->faker->date(),
