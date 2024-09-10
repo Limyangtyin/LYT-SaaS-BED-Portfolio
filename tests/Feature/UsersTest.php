@@ -39,8 +39,12 @@ it('can fetch a user', function () {
 
 
 it('can add a new user', function () {
-    // Create one company instance without saving
-    $user = User::factory()->make();
+    $company = \App\Models\Company::factory()->create();
+
+    // Create one user instance without saving
+    $user = User::factory()->make([
+        'company_id' => $company->id,
+    ]);
 
     $data = [
         'success' => true,
@@ -57,10 +61,9 @@ it('can edit a user profile', function () {
     $user = User::factory()->create();
 
     $updatedData = [
-        'name' => 'Company 1',
-        'city' =>  'Perth',
-        'state' => 'WA',
-        'country' => 'Australia'
+        'given_name' => 'User1',
+        'user_type' =>  'staff',
+        'status' => 'unconfirmed',
     ];
 
     $data = [
@@ -69,7 +72,7 @@ it('can edit a user profile', function () {
         'data' => array_merge($user ->toArray(), $updatedData, ['id' => $user->id])
     ];
 
-    $response = $this->putJson("/api/v1/users/{$user->id}", $updatedData);
+    $response = $this->putJson("/api/v1/users/{$user->id}/update", $updatedData);
 
     $response->assertStatus(200)->assertJson($data);
 

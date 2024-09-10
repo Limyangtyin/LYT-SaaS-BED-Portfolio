@@ -26,7 +26,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'company_id' => Company::factory(),
             'user_type' => $this->faker->randomElement(['client', 'staff', 'applicant']),
-            'status' => $this->faker->randomElement(['active', 'unconfirmed', 'suspended', 'banned', 'unknown', 'suspended']),
+            'status' => $this->faker->randomElement(['active', 'unconfirmed', 'suspended', 'banned', 'unknown']),
         ];
     }
 }

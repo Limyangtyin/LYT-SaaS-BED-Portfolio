@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->foreignId('company_id')->constrained('companies')->cascadeOnDelete();
             $table->enum('user_type', ['client', 'staff', 'applicant']);
-            $table->enum('status', ['active', 'unconfirmed', 'suspended', 'banned', 'unknown', 'suspended']);
+            $table->enum('status', ['active', 'unconfirmed', 'suspended', 'banned', 'unknown']);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

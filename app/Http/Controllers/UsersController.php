@@ -33,15 +33,24 @@ class UsersController extends Controller
             'family_name' => 'required|string|max:255',
             'email' => 'required|string|max:500',
             'company_id' => 'required|exists:companies,id',
-            'user_type' => 'required|in:client,staff, applicant',
-            'status' => 'required|in:active,unconfirmed, suspended',
+            'user_type' => 'required|in:client,staff,applicant',
+            'status' => 'required|in:active,unconfirmed,suspended,banned,unknown',
         ]);
 
-        $user = User::create($validated);
+        try {
+            $user = User::create($validated);
+            return ApiResponseClass::sendResponse(
+                $user, "New user added successfully"
+            );
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not created',
+                'data' => []
+            ], 404);
+        }
 
-        return ApiResponseClass::sendResponse(
-            $user, "New user added successfully"
-        );
+
     }
 
     /**
@@ -69,7 +78,7 @@ class UsersController extends Controller
     public function update(Request $request, int $id)
     {
         try {
-            $user = Position::findOrFail($id);
+            $user = User::findOrFail($id);
 
             $user->update($request->all());
 
@@ -91,7 +100,7 @@ class UsersController extends Controller
     public function destroy(int $id)
     {
         try{
-            $user = Position::findOrFail($id);
+            $user = User::findOrFail($id);
             $user->delete();
             return ApiResponseClass::sendResponse(
                 $user, "A user has been removed successfully"
