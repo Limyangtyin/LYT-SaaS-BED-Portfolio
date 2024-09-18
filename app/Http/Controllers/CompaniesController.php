@@ -6,9 +6,20 @@ use App\Classes\ApiResponseClass;
 use App\Models\Company;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class CompaniesController extends Controller
+class CompaniesController extends Controller implements HasMiddleware
 {
+
+    public static function middleware()
+    {
+        // TODO: Implement middleware() method.
+        return [
+            new Middleware('auth:sanctum', except: ['index', 'show'])
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Nette\Schema\ValidationException;
 
 class AuthController extends Controller
 {
@@ -20,6 +21,12 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed'
         ]);
+
+        if($fields['user_type'] === 'client' && $fields['user_type'] === 'applicant') {
+            throw ValidationException::withMessages([
+                'user_type' => 'A user cannot be both client and applicant.',
+            ]);
+        }
 
         $fields['password'] = Hash::make($fields['password']);
 
