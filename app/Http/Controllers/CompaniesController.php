@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Classes\ApiResponseClass;
 use App\Models\Company;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -23,9 +24,19 @@ class CompaniesController extends Controller implements HasMiddleware
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $companies = Company::all();
+        $user = $request->user();
+        if (Gate::denies('browse', Company::class)) {
+            return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+        }
+
+        if($user->type === 'client') {
+            $companies = Company::where('user_id', $user->id)->get();
+        } else {
+            $companies = Company::all();
+        }
+
         return ApiResponseClass::sendResponse(
             $companies, "Company retrieved successfully"
         );
@@ -36,6 +47,11 @@ class CompaniesController extends Controller implements HasMiddleware
      */
     public function store(Request $request)
     {
+        $user = $request->user();
+        if (Gate::denies('create', Company::class)) {
+            return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'city' => 'required|string|max:255',
@@ -54,10 +70,15 @@ class CompaniesController extends Controller implements HasMiddleware
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+    public function show(Request $request, int $id)
     {
         try {
+            $user = $request->user();
             $company = Company::findOrFail($id);
+            if (Gate::denies('read', $company)) {
+                return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+            }
+
             return ApiResponseClass::sendResponse(
                 $company, "A company retrieved successfully"
             );
@@ -76,7 +97,11 @@ class CompaniesController extends Controller implements HasMiddleware
     public function update(Request $request, int $id)
     {
         try {
+            $user = $request->user();
             $company = Company::findOrFail($id);
+            if (Gate::denies('update', $company)) {
+                return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+            }
 
             $company->update($request->all());
 
@@ -95,10 +120,15 @@ class CompaniesController extends Controller implements HasMiddleware
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $id)
+    public function destroy(Request $request, int $id)
     {
         try{
+            $user = $request->user();
             $company = Company::findOrFail($id);
+            if (Gate::denies('delete', $company)) {
+                return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+            }
+
             $company->delete();
             return ApiResponseClass::sendResponse(
                 $company, "A company has been removed successfully"
@@ -136,10 +166,15 @@ class CompaniesController extends Controller implements HasMiddleware
      *
      * Restore the specified resource from storage.
      */
-    public function restore(int $id)
+    public function restore(Request $request, int $id)
     {
         try{
+            $user = $request->user();
             $company = Company::withTrashed()->findorfail($id);
+            if (Gate::denies('restore', $company)) {
+                return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+            }
+
             $company->restore();
             return ApiResponseClass::sendResponse(
                 $company, "A company has been restore successfully"
@@ -153,9 +188,13 @@ class CompaniesController extends Controller implements HasMiddleware
         }
     }
 
-    public function restoreAll() {
+    public function restoreAll(Request $request) {
         try {
+            $user = $request->user();
             $companies = Company::onlyTrashed()->get();
+            if (Gate::denies('restoreAll', $companies)) {
+                return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+            }
             foreach ($companies as $company) {
                 $company->restore();
             }
@@ -170,10 +209,14 @@ class CompaniesController extends Controller implements HasMiddleware
         }
     }
 
-    public function removeFromTrash(int $id)
+    public function removeFromTrash(Request $request, int $id)
     {
         try {
+            $user = $request->user();
             $company = Company::onlyTrashed()->findOrFail($id);
+            if (Gate::denies('trash', $company)) {
+                return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+            }
             $company->forceDelete();
             return ApiResponseClass::sendResponse(
                 null, "The company has been permanently deleted from trash"
@@ -187,10 +230,14 @@ class CompaniesController extends Controller implements HasMiddleware
         }
     }
 
-    public function removeAllFromTrash()
+    public function removeAllFromTrash(Request $request)
     {
         try {
+            $user = $request->user();
             $companies = Company::onlyTrashed()->get();
+            if (Gate::denies('trashAll', $companies)) {
+                return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+            }
             foreach ($companies as $company) {
                 $company->forceDelete();
             }
