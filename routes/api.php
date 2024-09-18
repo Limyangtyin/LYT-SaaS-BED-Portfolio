@@ -46,5 +46,9 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('users', [UsersController::class, 'store'])->name('user.store');
     Route::put('users/{id}/update', [UsersController::class, 'update'])->name('user.update');
     Route::delete('users/{id}/delete', [UsersController::class, 'destroy'])->name('user.delete');
+    Route::delete('users/delete-all', [UsersController::class, 'destroyAll'])->name('user.delete-all');
     Route::put('users/{id}/restore', [UsersController::class, 'restore'])->name('user.restore');
+    Route::put('users/restore-all', [UsersController::class, 'restoreAll'])->name('user.restore-all');
+    Route::put('users/{id}/removeTrash', [UsersController::class, 'removeFromTrash'])->name('user.removeTrash');
+    Route::put('users/removeTrash-all', [UsersController::class, 'removeAllFromTrash'])->name('user.removeTrash-all');
 });

@@ -115,6 +115,24 @@ class UsersController extends Controller
         }
     }
 
+    public function destroyAll()
+    {
+        try{
+            $users = User::all();
+            foreach ($users as $user) {
+                $user->delete();
+            }
+            return ApiResponseClass::sendResponse(
+                null, "All users have been removed successfully");
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error occurred when trying to delete all users',
+                'data' => []
+            ], 500);
+        }
+    }
+
     /**
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
@@ -135,6 +153,58 @@ class UsersController extends Controller
                 'message' => 'User not found in trash',
                 'data' => []
             ], 404);
+        }
+    }
+    public function restoreAll() {
+        try {
+            $users = User::onlyTrashed()->get();
+            foreach ($users as $user) {
+                $user->restore();
+            }
+            return ApiResponseClass::sendResponse(
+                null, "All users have been restore successfully");
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error occurred when trying to restore all users',
+                'data' => []
+            ], 500);
+        }
+    }
+
+    public function removeFromTrash(int $id)
+    {
+        try {
+            $user = User::onlyTrashed()->findOrFail($id);
+            $user->forceDelete();
+            return ApiResponseClass::sendResponse(
+                null, "The user has been permanently deleted from trash"
+            );
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found in trash',
+                'data' => []
+            ], 404);
+        }
+    }
+
+    public function removeAllFromTrash()
+    {
+        try {
+            $users = User::onlyTrashed()->get();
+            foreach ($users as $user) {
+                $user->forceDelete();
+            }
+            return ApiResponseClass::sendResponse(
+                null, "All users have been permanently deleted from trash"
+            );
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error occurred when trying to permanently delete all users',
+                'data' => []
+            ], 500);
         }
     }
 }

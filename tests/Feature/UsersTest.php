@@ -95,6 +95,21 @@ it('can delete a user', function () {
 
 });
 
+it('can delete all users', function () {
+    $users = User::factory(3)->create();
+
+    $data = [
+        'success' => true,
+        'message' => "All users have been removed successfully",
+        'data' => $users->toArray()
+    ];
+
+    $response = $this->deleteJson("/api/v1/users/delete-all");
+
+    $response->assertStatus(200)->assertJson($data);
+
+});
+
 it('can restore a user', function () {
     $user = User::factory()->create();
 
@@ -115,5 +130,75 @@ it('can restore a user', function () {
 
     $response = $this->putJson("/api/v1/users/{$user->id}/restore");
     $response->assertStatus(200)->assertJson($restoredata);
+
+});
+
+it('can restore all users', function () {
+    $users = User::factory(3)->create();
+
+    $deletedata = [
+        'success' => true,
+        'message' => "All users have been removed successfully",
+        'data' => []
+    ];
+
+    $restoredata = [
+        'success' => true,
+        'message' => "All users have been restore successfully",
+        'data' => $users->toArray()
+    ];
+
+    $response = $this->deleteJson("/api/v1/users/delete-all");
+    $response->assertStatus(200)->assertJson($deletedata);
+
+    $response = $this->putJson("/api/v1/users/restore-all");
+    $response->assertStatus(200)->assertJson($restoredata);
+
+});
+
+
+it('can remove a user from trash', function () {
+    $user = User::factory()->create();
+
+    $deletedata = [
+        'success' => true,
+        'message' => "A user has been removed successfully",
+        'data' => []
+    ];
+
+    $permanentDeleteData = [
+        'success' => true,
+        'message' => "The user has been permanently deleted from trash",
+        'data' => null
+    ];
+
+    $response = $this->deleteJson("/api/v1/positions/{$user->id}/delete");
+    $response->assertStatus(200)->assertJson($deletedata);
+
+    $response = $this->deleteJson("/api/v1/positions/{$user->id}/removeTrash");
+    $response->assertStatus(200)->assertJson($permanentDeleteData);
+
+});
+
+it('can remove all users from trash', function () {
+    $users = User::factory(3)->create();
+
+    $deletedata = [
+        'success' => true,
+        'message' => "All users have been removed successfully",
+        'data' => []
+    ];
+
+    $permanentDeleteData = [
+        'success' => true,
+        'message' => "All users have been permanently deleted from trash",
+        'data' => null
+    ];
+
+    $response = $this->deleteJson("/api/v1/users/delete-all");
+    $response->assertStatus(200)->assertJson($deletedata);
+
+    $response = $this->deleteJson("/api/v1/users/{removeTrash-all");
+    $response->assertStatus(200)->assertJson($permanentDeleteData);
 
 });
