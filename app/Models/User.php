@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
     use SoftDeletes;
 
 
@@ -27,6 +28,7 @@ class User extends Authenticatable
         'company_id',
         'user_type',
         'status',
+        'password'
     ];
 
     /**
@@ -50,5 +52,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function position() {
+        return $this->hasMany(Position::class);
+    }
+
+    public function company() {
+        return $this->belongsto(Company::class);
     }
 }

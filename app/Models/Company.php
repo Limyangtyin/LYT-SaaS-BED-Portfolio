@@ -18,4 +18,8 @@ class Company extends Model
         'country',
         'logo',
     ];
+
+    public function users() {
+        return $this->hasMany(User::class);
+    }
 }

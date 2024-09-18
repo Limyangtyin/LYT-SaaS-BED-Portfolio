@@ -5,11 +5,22 @@ namespace App\Http\Controllers;
 use App\Classes\ApiResponseClass;
 use App\Models\Company;
 use App\Models\Position;
+use http\Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class PositionsController extends Controller
+class PositionsController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        // TODO: Implement middleware() method.
+        return [
+            new Middleware('auth:sanctum', except: ['index', 'show'])
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -36,12 +47,12 @@ class PositionsController extends Controller
             'maximum_salary' => 'required|numeric|min:0|gte:minimum_salary',
             'salary_currency' => 'required|string|size:3',
             'company_id' => 'required|exists:companies,id',
+//            'user_id' => 'required|exists:users,id',
             'benefits' => 'nullable|string|max:500',
             'requirements' => 'nullable|string|max:500',
             'position_type' => 'required|in:permanent,contract,part-time,casual,internship',
         ]);
-
-        $position = Position::create($validated);
+        $position = $request->user()->position()->create($validated);
 
         return ApiResponseClass::sendResponse(
             $position, "New position added successfully"

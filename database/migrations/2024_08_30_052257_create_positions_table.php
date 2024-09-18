@@ -22,6 +22,7 @@ return new class extends Migration
             $table->float('maximum_salary');
             $table->string('salary_currency')->default('AUD');
             $table->foreignId('company_id')->constrained('companies')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('benefits')->index();
             $table->string('requirements')->index();
             $table->enum('position_type', ['permanent', 'contract', 'part-time', 'casual', 'internship']);

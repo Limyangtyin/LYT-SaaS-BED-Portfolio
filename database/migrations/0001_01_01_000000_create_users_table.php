@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained('companies')->cascadeOnDelete();
             $table->enum('user_type', ['client', 'staff', 'applicant']);
             $table->enum('status', ['active', 'unconfirmed', 'suspended', 'banned', 'unknown']);
+            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

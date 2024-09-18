@@ -20,10 +20,17 @@ class Position extends Model
         'minimum_salary',
         'maximum_salary',
         'salary_currency',
-        'company_id',
         'benefits',
         'requirements',
         'position_type'
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function company() {
+        return $this->belongsTo(Company::class);
+    }
 
 }

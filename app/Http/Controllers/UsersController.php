@@ -32,9 +32,10 @@ class UsersController extends Controller
             'given_name' => 'required|string|max:255',
             'family_name' => 'required|string|max:255',
             'email' => 'required|string|max:500',
-            'company_id' => 'required|exists:companies,id',
+//            'company_id' => 'required|exists:companies,id',
             'user_type' => 'required|in:client,staff,applicant',
             'status' => 'required|in:active,unconfirmed,suspended,banned,unknown',
+            'password' => 'required'
         ]);
 
         try {

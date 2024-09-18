@@ -6242,16 +6242,16 @@
         },
         {
             "name": "knuckleswtf/scribe",
-            "version": "4.37.1",
+            "version": "4.37.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/knuckleswtf/scribe.git",
-                "reference": "5eb0f65973db9df5ba455f8bbcc8a1cd6573564b"
+                "reference": "6318f3f68cbf09328e5cb6843ce1739e529ef1ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/knuckleswtf/scribe/zipball/5eb0f65973db9df5ba455f8bbcc8a1cd6573564b",
-                "reference": "5eb0f65973db9df5ba455f8bbcc8a1cd6573564b",
+                "url": "https://api.github.com/repos/knuckleswtf/scribe/zipball/6318f3f68cbf09328e5cb6843ce1739e529ef1ac",
+                "reference": "6318f3f68cbf09328e5cb6843ce1739e529ef1ac",
                 "shasum": ""
             },
             "require": {
@@ -6325,7 +6325,7 @@
             ],
             "support": {
                 "issues": "https://github.com/knuckleswtf/scribe/issues",
-                "source": "https://github.com/knuckleswtf/scribe/tree/4.37.1"
+                "source": "https://github.com/knuckleswtf/scribe/tree/4.37.2"
             },
             "funding": [
                 {
@@ -6333,7 +6333,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2024-07-11T13:57:05+00:00"
+            "time": "2024-08-30T12:15:51+00:00"
         },
         {
             "name": "laravel/breeze",
