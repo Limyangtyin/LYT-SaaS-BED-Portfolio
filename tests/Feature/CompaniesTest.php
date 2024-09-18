@@ -92,6 +92,21 @@ it('can delete a company', function () {
 
 });
 
+it('can delete all companies', function () {
+    $companies = Company::factory(3)->create();
+
+    $data = [
+        'success' => true,
+        'message' => "All companies have been removed successfully",
+        'data' => $companies->toArray()
+    ];
+
+    $response = $this->deleteJson("/api/v1/companies/delete-all");
+
+    $response->assertStatus(200)->assertJson($data);
+
+});
+
 it('can restore a company', function () {
     $company = Company::factory()->create();
 
@@ -112,5 +127,75 @@ it('can restore a company', function () {
 
     $response = $this->putJson("/api/v1/companies/{$company->id}/restore");
     $response->assertStatus(200)->assertJson($restoredata);
+
+});
+
+it('can restore all companies', function () {
+    $companies = Company::factory(3)->create();
+
+    $deletedata = [
+        'success' => true,
+        'message' => "All companies have been removed successfully",
+        'data' => []
+    ];
+
+    $restoredata = [
+        'success' => true,
+        'message' => "All companies have been restore successfully",
+        'data' => $companies->toArray()
+    ];
+
+    $response = $this->deleteJson("/api/v1/companies/delete-all");
+    $response->assertStatus(200)->assertJson($deletedata);
+
+    $response = $this->putJson("/api/v1/companies/restore-all");
+    $response->assertStatus(200)->assertJson($restoredata);
+
+});
+
+
+it('can remove a company from trash', function () {
+    $company = Company::factory()->create();
+
+    $deletedata = [
+        'success' => true,
+        'message' => "A company has been removed successfully",
+        'data' => []
+    ];
+
+    $permanentDeleteData = [
+        'success' => true,
+        'message' => "The company has been permanently deleted from trash",
+        'data' => null
+    ];
+
+    $response = $this->deleteJson("/api/v1/positions/{$company->id}/delete");
+    $response->assertStatus(200)->assertJson($deletedata);
+
+    $response = $this->deleteJson("/api/v1/positions/{$company->id}/removeTrash");
+    $response->assertStatus(200)->assertJson($permanentDeleteData);
+
+});
+
+it('can remove all companies from trash', function () {
+    $companies = Company::factory(3)->create();
+
+    $deletedata = [
+        'success' => true,
+        'message' => "All companies have been removed successfully",
+        'data' => []
+    ];
+
+    $permanentDeleteData = [
+        'success' => true,
+        'message' => "All companies have been permanently deleted from trash",
+        'data' => null
+    ];
+
+    $response = $this->deleteJson("/api/v1/companies/delete-all");
+    $response->assertStatus(200)->assertJson($deletedata);
+
+    $response = $this->deleteJson("/api/v1/companies/{removeTrash-all");
+    $response->assertStatus(200)->assertJson($permanentDeleteData);
 
 });

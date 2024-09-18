@@ -100,7 +100,7 @@ it('can delete all positions', function () {
 
     $data = [
         'success' => true,
-        'message' => "A position has been removed successfully",
+        'message' => "All positions have been removed successfully",
         'data' => $positions->toArray()
     ];
 

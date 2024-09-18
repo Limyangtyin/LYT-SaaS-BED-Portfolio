@@ -101,6 +101,24 @@ class CompaniesController extends Controller
         }
     }
 
+    public function destroyAll()
+    {
+        try{
+            $companies = Company::all();
+            foreach ($companies as $company) {
+                $company->delete();
+            }
+            return ApiResponseClass::sendResponse(
+                null, "All companies have been removed successfully");
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error occurred when trying to delete all companies',
+                'data' => []
+            ], 500);
+        }
+    }
+
     /**
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
@@ -121,6 +139,59 @@ class CompaniesController extends Controller
                 'message' => 'Company not found in trash',
                 'data' => []
             ], 404);
+        }
+    }
+
+    public function restoreAll() {
+        try {
+            $companies = Company::onlyTrashed()->get();
+            foreach ($companies as $company) {
+                $company->restore();
+            }
+            return ApiResponseClass::sendResponse(
+                null, "All companies have been restore successfully");
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error occurred when trying to restore all companies',
+                'data' => []
+            ], 500);
+        }
+    }
+
+    public function removeFromTrash(int $id)
+    {
+        try {
+            $company = Company::onlyTrashed()->findOrFail($id);
+            $company->forceDelete();
+            return ApiResponseClass::sendResponse(
+                null, "The company has been permanently deleted from trash"
+            );
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Company not found in trash',
+                'data' => []
+            ], 404);
+        }
+    }
+
+    public function removeAllFromTrash()
+    {
+        try {
+            $companies = Company::onlyTrashed()->get();
+            foreach ($companies as $company) {
+                $company->forceDelete();
+            }
+            return ApiResponseClass::sendResponse(
+                null, "All companies have been permanently deleted from trash"
+            );
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error occurred when trying to permanently delete all companies',
+                'data' => []
+            ], 500);
         }
     }
 }
