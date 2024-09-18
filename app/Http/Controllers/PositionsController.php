@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Classes\ApiResponseClass;
 use App\Models\Company;
 use App\Models\Position;
+use http\Env\Response;
 use http\Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -121,6 +122,27 @@ class PositionsController extends Controller implements HasMiddleware
     }
 
     /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroyAll()
+    {
+        try{
+            $positions = Position::all();
+            foreach ($positions as $position) {
+                $position->delete();
+            }
+            return ApiResponseClass::sendResponse(
+                null, "All positions have been removed successfully");
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error occurred when trying to delete all positions',
+                'data' => []
+            ], 500);
+        }
+    }
+
+    /**
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      *
@@ -129,7 +151,7 @@ class PositionsController extends Controller implements HasMiddleware
     public function restore(int $id)
     {
         try{
-            $position = Position::withTrashed()->findorfail($id);
+            $position = Position::onlyTrashed()->findorfail($id);
             $position->restore();
             return ApiResponseClass::sendResponse(
                 $position, "A position has been restore successfully"
@@ -140,6 +162,59 @@ class PositionsController extends Controller implements HasMiddleware
                 'message' => 'Position not found in trash',
                 'data' => []
             ], 404);
+        }
+    }
+
+    public function restoreAll() {
+        try {
+            $positions = Position::onlyTrashed()->get();
+            foreach ($positions as $position) {
+                $position->restore();
+            }
+            return ApiResponseClass::sendResponse(
+                null, "All positions have been restore successfully");
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error occurred when trying to restore all positions',
+                'data' => []
+            ], 500);
+        }
+    }
+
+    public function removeFromTrash(int $id)
+    {
+        try {
+            $position = Position::onlyTrashed()->findOrFail($id);
+            $position->forceDelete();
+            return ApiResponseClass::sendResponse(
+                null, "The position has been permanently deleted from trash"
+            );
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Position not found in trash',
+                'data' => []
+            ], 404);
+        }
+    }
+
+    public function removeAllFromTrash()
+    {
+        try {
+            $positions = Position::onlyTrashed()->get();
+            foreach ($positions as $position) {
+                $position->forceDelete();
+            }
+            return ApiResponseClass::sendResponse(
+                null, "All positions have been permanently deleted from trash"
+            );
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error occurred when trying to permanently delete all positions',
+                'data' => []
+            ], 500);
         }
     }
 }

@@ -31,7 +31,11 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('positions', [PositionsController::class, 'store'])->name('position.store');
     Route::put('positions/{id}/update', [PositionsController::class, 'update'])->name('position.update');
     Route::delete('positions/{id}/delete', [PositionsController::class, 'destroy'])->name('position.delete');
+    Route::delete('positions/delete-all', [PositionsController::class, 'destroyAll'])->name('position.delete-all');
     Route::put('positions/{id}/restore', [PositionsController::class, 'restore'])->name('position.restore');
+    Route::put('positions/restore-all', [PositionsController::class, 'restoreAll'])->name('position.restore-all');
+    Route::put('positions/{id}/removeTrash', [PositionsController::class, 'removeFromTrash'])->name('position.removeTrash');
+    Route::put('positions/removeTrash-all', [PositionsController::class, 'removeAllFromTrash'])->name('position.removeTrash-all');
 
     Route::get('users', [UsersController::class, 'index'])->name('user.index');
     Route::get('users/{id}', [UsersController::class, 'show'])->name('user.show');

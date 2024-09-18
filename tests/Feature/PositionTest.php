@@ -95,6 +95,21 @@ it('can delete a position', function () {
 
 });
 
+it('can delete all positions', function () {
+    $positions = Position::factory(3)->create();
+
+    $data = [
+        'success' => true,
+        'message' => "A position has been removed successfully",
+        'data' => $positions->toArray()
+    ];
+
+    $response = $this->deleteJson("/api/v1/positions/delete-all");
+
+    $response->assertStatus(200)->assertJson($data);
+
+});
+
 it('can restore a position', function () {
     $position = Position::factory()->create();
 
@@ -115,5 +130,75 @@ it('can restore a position', function () {
 
     $response = $this->putJson("/api/v1/positions/{$position->id}/restore");
     $response->assertStatus(200)->assertJson($restoredata);
+
+});
+
+it('can restore all positions', function () {
+    $positions = Position::factory(3)->create();
+
+    $deletedata = [
+        'success' => true,
+        'message' => "All positions have been removed successfully",
+        'data' => []
+    ];
+
+    $restoredata = [
+        'success' => true,
+        'message' => "All positions have been restore successfully",
+        'data' => $positions->toArray()
+    ];
+
+    $response = $this->deleteJson("/api/v1/positions/delete-all");
+    $response->assertStatus(200)->assertJson($deletedata);
+
+    $response = $this->putJson("/api/v1/positions/restore-all");
+    $response->assertStatus(200)->assertJson($restoredata);
+
+});
+
+
+it('can remove a position from trash', function () {
+    $position = Position::factory()->create();
+
+    $deletedata = [
+        'success' => true,
+        'message' => "A position has been removed successfully",
+        'data' => []
+    ];
+
+    $permanentDeleteData = [
+        'success' => true,
+        'message' => "The position has been permanently deleted from trash",
+        'data' => null
+    ];
+
+    $response = $this->deleteJson("/api/v1/positions/{$position->id}/delete");
+    $response->assertStatus(200)->assertJson($deletedata);
+
+    $response = $this->deleteJson("/api/v1/positions/{$position->id}/removeTrash");
+    $response->assertStatus(200)->assertJson($permanentDeleteData);
+
+});
+
+it('can remove all positions from trash', function () {
+    $positions = Position::factory(3)->create();
+
+    $deletedata = [
+        'success' => true,
+        'message' => "All positions have been removed successfully",
+        'data' => []
+    ];
+
+    $permanentDeleteData = [
+        'success' => true,
+        'message' => "All positions have been permanently deleted from trash",
+        'data' => null
+    ];
+
+    $response = $this->deleteJson("/api/v1/positions/delete-all");
+    $response->assertStatus(200)->assertJson($deletedata);
+
+    $response = $this->deleteJson("/api/v1/positions/{removeTrash-all");
+    $response->assertStatus(200)->assertJson($permanentDeleteData);
 
 });
