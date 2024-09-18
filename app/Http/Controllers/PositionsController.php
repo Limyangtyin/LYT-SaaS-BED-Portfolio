@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 class PositionsController extends Controller implements HasMiddleware
 {
@@ -25,9 +26,14 @@ class PositionsController extends Controller implements HasMiddleware
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $positions = Position::all();
+        if (Auth::check()) {
+            $positions = Position::paginate(6);
+        } else {
+            $positions = Position::limit(6)->get();
+        }
+
         return ApiResponseClass::sendResponse(
             $positions, "Positions retrieved successfully"
         );
