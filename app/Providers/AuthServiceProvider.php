@@ -43,5 +43,16 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('trash', [CompanyPolicy::class, 'trash']);
         Gate::define('trashAll', [CompanyPolicy::class, 'trashAll']);
 
+        Gate::define('browse', [PositionPolicy::class, 'browse']);
+        Gate::define('read', [PositionPolicy::class, 'read']);
+        Gate::define('update', [PositionPolicy::class, 'update']);
+        Gate::define('create', [PositionPolicy::class, 'create']);
+        Gate::define('delete', [PositionPolicy::class, 'delete']);
+        Gate::define('search', [PositionPolicy::class, 'search']);
+        Gate::define('restore', [PositionPolicy::class, 'restore']);
+        Gate::define('restoreAll', [PositionPolicy::class, 'restoreAll']);
+        Gate::define('trash', [PositionPolicy::class, 'trash']);
+        Gate::define('trashAll', [PositionPolicy::class, 'trashAll']);
+
     }
 }

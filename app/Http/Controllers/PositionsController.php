@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PositionsController extends Controller implements HasMiddleware
 {
@@ -28,8 +29,8 @@ class PositionsController extends Controller implements HasMiddleware
      */
     public function index(Request $request)
     {
-        if (Auth::check()) {
-            $positions = Position::paginate(6);
+        if (Auth::check() && Gate::allows('browse')) {
+            $positions = Position::paginate(10);
         } else {
             $positions = Position::limit(6)->get();
         }
@@ -44,6 +45,11 @@ class PositionsController extends Controller implements HasMiddleware
      */
     public function store(Request $request)
     {
+        $user = $request->user();
+        if (Gate::denies('create', Position::class)) {
+            return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+        }
+
         $validated = $request->validate([
             'advertising_start_date' => 'required|date_format:Y-m-d',
             'advertising_end_date' => 'required|date_format:Y-m-d',
@@ -59,7 +65,7 @@ class PositionsController extends Controller implements HasMiddleware
             'requirements' => 'nullable|string|max:500',
             'position_type' => 'required|in:permanent,contract,part-time,casual,internship',
         ]);
-        $position = $request->user()->position()->create($validated);
+        $position = $user()->position()->create($validated);
 
         return ApiResponseClass::sendResponse(
             $position, "New position added successfully"
@@ -69,10 +75,14 @@ class PositionsController extends Controller implements HasMiddleware
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+    public function show(Request $request, int $id)
     {
         try {
+            $user = $request->user();
             $position = Position::findOrFail($id);
+            if (Gate::denies('read', Position::class)) {
+                return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+            }
             return ApiResponseClass::sendResponse(
                 $position, "A position retrieved successfully",
             );
@@ -91,8 +101,11 @@ class PositionsController extends Controller implements HasMiddleware
     public function update(Request $request, int $id)
     {
         try {
+            $user = $request->user();
             $position = Position::findOrFail($id);
-
+            if (Gate::denies('update', Position::class)) {
+                return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+            }
             $position->update($request->all());
 
             return ApiResponseClass::sendResponse(
@@ -110,10 +123,15 @@ class PositionsController extends Controller implements HasMiddleware
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $id)
+    public function destroy(Request $request, int $id)
     {
         try{
+            $user = $request->user();
             $position = Position::findOrFail($id);
+            if (Gate::denies('delete', Position::class)) {
+                return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+            }
+
             $position->delete();
             return ApiResponseClass::sendResponse(
                 $position, "A position has been removed successfully"
@@ -154,10 +172,14 @@ class PositionsController extends Controller implements HasMiddleware
      *
      * Restore the specified resource from storage.
      */
-    public function restore(int $id)
+    public function restore(Request $request, int $id)
     {
         try{
+            $user = $request->user();
             $position = Position::onlyTrashed()->findorfail($id);
+            if (Gate::denies('restore', Position::class)) {
+                return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+            }
             $position->restore();
             return ApiResponseClass::sendResponse(
                 $position, "A position has been restore successfully"
@@ -171,9 +193,13 @@ class PositionsController extends Controller implements HasMiddleware
         }
     }
 
-    public function restoreAll() {
+    public function restoreAll(Request $request) {
         try {
+            $user = $request->user();
             $positions = Position::onlyTrashed()->get();
+            if (Gate::denies('restoreAll', Position::class)) {
+                return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+            }
             foreach ($positions as $position) {
                 $position->restore();
             }
@@ -188,10 +214,14 @@ class PositionsController extends Controller implements HasMiddleware
         }
     }
 
-    public function removeFromTrash(int $id)
+    public function removeFromTrash(Request $request, int $id)
     {
         try {
+            $user = $request->user();
             $position = Position::onlyTrashed()->findOrFail($id);
+            if (Gate::denies('trash', Position::class)) {
+                return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+            }
             $position->forceDelete();
             return ApiResponseClass::sendResponse(
                 null, "The position has been permanently deleted from trash"
@@ -205,10 +235,14 @@ class PositionsController extends Controller implements HasMiddleware
         }
     }
 
-    public function removeAllFromTrash()
+    public function removeAllFromTrash(Request $request)
     {
         try {
+            $user = $request->user();
             $positions = Position::onlyTrashed()->get();
+            if (Gate::denies('trashAll', Position::class)) {
+                return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+            }
             foreach ($positions as $position) {
                 $position->forceDelete();
             }

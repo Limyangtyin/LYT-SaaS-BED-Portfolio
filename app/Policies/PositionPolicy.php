@@ -8,59 +8,66 @@ use Illuminate\Auth\Access\Response;
 
 class PositionPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
+    // Determine if the user can browse positions
+    public function browse(User $user)
     {
-        return true;
+        return in_array($user->type, ['applicant', 'client', 'staff', 'administrator', 'super-user']);
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Position $position): bool
+    // Determine if the user can read a position
+    public function read(User $user, Position $position)
     {
-        //
+        return $user->type === 'applicant' ||
+            in_array($user->type, ['client', 'staff', 'administrator', 'super-user']);
     }
 
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
+    // Determine if the user can edit a position
+    public function update(User $user, Position $position)
     {
-        //
+        return ($user->type === 'client' && $position->user_id === $user->id) ||
+            in_array($user->type, ['staff', 'administrator', 'super-user']);
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, Position $position): bool
+    // Determine if the user can create a position
+    public function create(User $user)
     {
-        //
+        return in_array($user->type, ['client', 'staff', 'administrator', 'super-user']);
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, Position $position): bool
+    // Determine if the user can delete a position
+    public function delete(User $user, Position $position)
     {
-        //
+        return ($user->type === 'client' && $position->user_id === $user->id) ||
+            in_array($user->type, ['staff', 'administrator', 'super-user']);
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Position $position): bool
+    // Determine if the user can search positions
+    public function search(User $user)
     {
-        //
+        return in_array($user->type, ['applicant', 'client', 'staff', 'administrator', 'super-user']);
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Position $position): bool
+    // Determine if the user can restore a position
+    public function restore(User $user)
     {
-        //
+        return in_array($user->type, ['staff', 'administrator', 'super-user']);
+    }
+
+    // Determine if the user can restore all positions
+    public function restoreAll(User $user)
+    {
+        return in_array($user->type, ['staff', 'administrator', 'super-user']);
+    }
+
+    // Determine if the user can permanently delete a position from trash
+    public function trash(User $user)
+    {
+        return in_array($user->type, ['staff', 'administrator', 'super-user']);
+    }
+
+    // Determine if the user can permanently delete all positions from trash
+    public function trashAll(User $user)
+    {
+        return in_array($user->type, ['staff', 'administrator', 'super-user']);
     }
 }
