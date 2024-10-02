@@ -27,7 +27,7 @@ class ApiResponseClass
     public static function sendResponse($result, string $message, int $code = 200): JsonResponse
     {
         $response = [
-            'success' => true,
+            'success' => (bool)array_search($code, [0,200, 201]),
             'message' => $message,
             'data' => $result,
         ];

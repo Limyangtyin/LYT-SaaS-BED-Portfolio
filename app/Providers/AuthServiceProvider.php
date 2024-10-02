@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Company;
 use App\Policies\CompanyPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\Models\Position;
 use App\Policies\PositionPolicy;
@@ -54,5 +55,15 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('trash', [PositionPolicy::class, 'trash']);
         Gate::define('trashAll', [PositionPolicy::class, 'trashAll']);
 
+        Gate::define('browse', [UserPolicy::class, 'browse']);
+        Gate::define('read', [UserPolicy::class, 'read']);
+        Gate::define('update', [UserPolicy::class, 'update']);
+        Gate::define('create', [UserPolicy::class, 'create']);
+        Gate::define('delete', [UserPolicy::class, 'delete']);
+        Gate::define('search', [UserPolicy::class, 'search']);
+        Gate::define('restore', [UserPolicy::class, 'restore']);
+        Gate::define('restoreAll', [UserPolicy::class, 'restoreAll']);
+        Gate::define('trash', [UserPolicy::class, 'trash']);
+        Gate::define('trashAll', [UserPolicy::class, 'trashAll']);
     }
 }

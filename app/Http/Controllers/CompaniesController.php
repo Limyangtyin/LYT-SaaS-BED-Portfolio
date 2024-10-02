@@ -10,94 +10,114 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 
-class CompaniesController extends Controller implements HasMiddleware
+class CompaniesController extends Controller
 {
-
-    public static function middleware()
-    {
-        // TODO: Implement middleware() method.
-        return [
-            new Middleware('auth:sanctum', except: ['index', 'show'])
-        ];
-    }
-
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource
+     *
+     * @return \Illuminate\Http\JsonResponse
+     * @group Companies
      */
-    public function index(Request $request)
+    public function index()
     {
-        $user = $request->user();
         if (Gate::denies('browse', Company::class)) {
             return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
         }
 
-        if($user->type === 'client') {
-            $companies = Company::where('user_id', $user->id)->get();
-        } else {
+        try{
             $companies = Company::all();
+
+            return ApiResponseClass::sendResponse(
+                $companies, "Company retrieved successfully", 200
+            );
+        } catch (\Exception $e) {
+            return ApiResponseClass::sendResponse(
+                null, 'Failed to retrieved companies', 500
+            );
         }
 
-        return ApiResponseClass::sendResponse(
-            $companies, "Company retrieved successfully"
-        );
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @group Companies
      */
     public function store(Request $request)
     {
-        $user = $request->user();
         if (Gate::denies('create', Company::class)) {
             return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
         }
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'city' => 'required|string|max:255',
+                'state' => 'required|string|max:255',
+                'country' => 'required|string|max:255',
+                'logo' => 'nullable|string|max:255',
+            ]);
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'state' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
-            'logo' => 'nullable|string|max:255',
-        ]);
+            $user = $request->user();
 
-        $company = Company::create($validated);
+            $validated['user_id'] = $user->id;
 
-        return ApiResponseClass::sendResponse(
-            $company, "New company added successfully"
-        );
+            $company = Company::create($validated);
+
+            $user->company_id = $company->id;
+            $user->save();
+
+            return ApiResponseClass::sendResponse(
+                $company, "New company added successfully", 201
+            );
+        } catch (\Exception $e) {
+            return ApiResponseClass::sendResponse(
+                null, 'Failed to create company', 500
+            );
+        }
     }
 
     /**
      * Display the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     * @group Companies
      */
-    public function show(Request $request, int $id)
+    public function show(int $id)
     {
         try {
-            $user = $request->user();
             $company = Company::findOrFail($id);
             if (Gate::denies('read', $company)) {
                 return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
             }
 
             return ApiResponseClass::sendResponse(
-                $company, "A company retrieved successfully"
+                $company, "A company retrieved successfully", 200
             );
         } catch (ModelNotFoundException $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Company not found',
-                'data' => []
-            ], 404);
+            return ApiResponseClass::sendResponse(
+                null, 'Company not found', 404
+            );
+        } catch (\Exception $e) {
+            return ApiResponseClass::sendResponse(
+                null, 'Failed to retrieved company', 500
+            );
         }
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     * @group Companies
      */
     public function update(Request $request, int $id)
     {
         try {
-            $user = $request->user();
             $company = Company::findOrFail($id);
             if (Gate::denies('update', $company)) {
                 return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
@@ -106,24 +126,29 @@ class CompaniesController extends Controller implements HasMiddleware
             $company->update($request->all());
 
             return ApiResponseClass::sendResponse(
-                $company, "Company's data has been updated successfully"
+                $company, "Company's data has been updated successfully", 200
             );
-            } catch (ModelNotFoundException $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Company not found',
-                'data' => []
-            ], 404);
+        } catch (ModelNotFoundException $e) {
+            return ApiResponseClass::sendResponse(
+                null, 'Company not found', 404
+            );
+        } catch (\Exception $e) {
+            return ApiResponseClass::sendResponse(
+                null, 'Failed to update company', 500
+            );
         }
     }
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     * @group Companies
      */
-    public function destroy(Request $request, int $id)
+    public function destroy(int $id)
     {
         try{
-            $user = $request->user();
             $company = Company::findOrFail($id);
             if (Gate::denies('delete', $company)) {
                 return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
@@ -134,85 +159,83 @@ class CompaniesController extends Controller implements HasMiddleware
                 $company, "A company has been removed successfully"
             );
         } catch (ModelNotFoundException $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Company not found',
-                'data' => []
-            ], 404);
+            return ApiResponseClass::sendResponse(
+                null, 'Company not found', 404);
+        } catch (\Exception $e) {
+            return ApiResponseClass::sendResponse(
+                null, 'Failed to remove company', 500
+            );
         }
     }
 
-    public function destroyAll()
-    {
-        try{
-            $companies = Company::all();
-            foreach ($companies as $company) {
-                $company->delete();
-            }
-            return ApiResponseClass::sendResponse(
-                null, "All companies have been removed successfully");
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Error occurred when trying to delete all companies',
-                'data' => []
-            ], 500);
-        }
-    }
 
     /**
+     * Restore the specified resource from storage.
+     *
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
-     *
-     * Restore the specified resource from storage.
+     * @group Companies
      */
-    public function restore(Request $request, int $id)
+    public function restore(int $id)
     {
+        if (Gate::denies('restore', Company::class)) {
+            return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+        }
+
         try{
-            $user = $request->user();
             $company = Company::withTrashed()->findorfail($id);
-            if (Gate::denies('restore', $company)) {
-                return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
-            }
 
             $company->restore();
             return ApiResponseClass::sendResponse(
                 $company, "A company has been restore successfully"
             );
         } catch (ModelNotFoundException $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Company not found in trash',
-                'data' => []
-            ], 404);
+            return ApiResponseClass::sendResponse(
+                null, 'Company not found in trash', 404
+            );
+        } catch (\Exception $e) {
+            return ApiResponseClass::sendResponse(
+                null, 'Failed to restore company', 500
+            );
         }
     }
 
-    public function restoreAll(Request $request) {
+    /**
+     * Restore all soft-deleted resources from storage
+     *
+     * @return \Illuminate\Http\JsonResponse
+     * @group Companies
+     */
+    public function restoreAll()
+    {
+        if (Gate::denies('restoreAll', Company::class)) {
+            return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+        }
+
         try {
-            $user = $request->user();
             $companies = Company::onlyTrashed()->get();
-            if (Gate::denies('restoreAll', $companies)) {
-                return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
-            }
             foreach ($companies as $company) {
                 $company->restore();
             }
             return ApiResponseClass::sendResponse(
                 null, "All companies have been restore successfully");
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Error occurred when trying to restore all companies',
-                'data' => []
-            ], 500);
+            return ApiResponseClass::sendResponse(
+                null, 'Failed to restore companies', 500
+            );
         }
     }
 
-    public function removeFromTrash(Request $request, int $id)
+    /**
+     * Permanently delete the specified resource from trash
+     *
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     * @group Companies
+     */
+    public function removeFromTrash(int $id)
     {
         try {
-            $user = $request->user();
             $company = Company::onlyTrashed()->findOrFail($id);
             if (Gate::denies('trash', $company)) {
                 return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
@@ -222,18 +245,25 @@ class CompaniesController extends Controller implements HasMiddleware
                 null, "The company has been permanently deleted from trash"
             );
         } catch (ModelNotFoundException $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Company not found in trash',
-                'data' => []
-            ], 404);
+            return ApiResponseClass::sendResponse(
+                null, 'Company not found in trash', 404
+            );
+        } catch (\Exception $e) {
+            return ApiResponseClass::sendResponse(
+                null, 'Failed to permanently delete company from trash', 500
+            );
         }
     }
 
-    public function removeAllFromTrash(Request $request)
+    /**
+     * Permanently delete all resource from trash
+     *
+     * @return \Illuminate\Http\JsonResponse
+     * @group Companies
+     */
+    public function removeAllFromTrash()
     {
         try {
-            $user = $request->user();
             $companies = Company::onlyTrashed()->get();
             if (Gate::denies('trashAll', $companies)) {
                 return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
@@ -245,11 +275,9 @@ class CompaniesController extends Controller implements HasMiddleware
                 null, "All companies have been permanently deleted from trash"
             );
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Error occurred when trying to permanently delete all companies',
-                'data' => []
-            ], 500);
+            return ApiResponseClass::sendResponse(
+                null, 'Failed to permanently delete companies from trash', 500
+            );
         }
     }
 }

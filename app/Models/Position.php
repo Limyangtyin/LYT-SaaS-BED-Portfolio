@@ -22,7 +22,9 @@ class Position extends Model
         'salary_currency',
         'benefits',
         'requirements',
-        'position_type'
+        'position_type',
+        'user_id',
+        'company_id'
     ];
 
     public function user() {

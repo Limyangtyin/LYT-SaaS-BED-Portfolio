@@ -1,12 +1,12 @@
-name: Endpoints
-description: ''
+name: Positions
+description: .
 endpoints:
   -
     httpMethods:
       - GET
     uri: api/positions
     metadata:
-      groupName: Endpoints
+      groupName: Positions
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -27,7 +27,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"success":true,"message":"Positions retrieved successfully","data":[]}'
+        content: '{"success":true,"message":"Positions retrieved successfully","data":[{"id":1,"advertising_start_date":"2020-10-10","advertising_end_date":"2020-12-12","position_title":"asldkm","position_description":"apsokd","position_keywords":"asd","minimum_salary":1000,"maximum_salary":5000,"salary_currency":"AUD","company_id":1,"user_id":1,"benefits":null,"requirements":null,"position_type":"contract","created_at":"2024-09-19T08:32:24.000000Z","updated_at":"2024-09-19T08:32:24.000000Z","deleted_at":null}]}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -45,7 +45,7 @@ endpoints:
       - POST
     uri: api/positions
     metadata:
-      groupName: Endpoints
+      groupName: Positions
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -65,7 +65,7 @@ endpoints:
         name: advertising_start_date
         description: 'Must be a valid date in the format <code>Y-m-d</code>.'
         required: true
-        example: '2024-09-12'
+        example: '2024-09-19'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -74,7 +74,7 @@ endpoints:
         name: advertising_end_date
         description: 'Must be a valid date in the format <code>Y-m-d</code>.'
         required: true
-        example: '2024-09-12'
+        example: '2024-09-19'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -83,7 +83,7 @@ endpoints:
         name: position_title
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: biiqttrbcziamm
+        example: ryckmsbvubzoaqpzqo
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -92,7 +92,7 @@ endpoints:
         name: position_description
         description: 'Must not be greater than 500 characters.'
         required: true
-        example: shq
+        example: qwmkqftbei
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -101,7 +101,7 @@ endpoints:
         name: position_keywords
         description: 'Must not be greater than 255 characters.'
         required: false
-        example: hqtqvlpb
+        example: brdalrakvcwl
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -110,7 +110,7 @@ endpoints:
         name: minimum_salary
         description: 'Must be at least 0.'
         required: true
-        example: 72
+        example: 90
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -119,7 +119,7 @@ endpoints:
         name: maximum_salary
         description: 'Must be at least 0.'
         required: true
-        example: 81
+        example: 12
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -128,16 +128,7 @@ endpoints:
         name: salary_currency
         description: 'Must be 3 characters.'
         required: true
-        example: gnw
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      company_id:
-        name: company_id
-        description: ''
-        required: true
-        example: quia
+        example: alp
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -146,7 +137,7 @@ endpoints:
         name: benefits
         description: 'Must not be greater than 500 characters.'
         required: false
-        example: rxgxpykbnfkwvnemxvqiiiv
+        example: zjlav
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -155,7 +146,7 @@ endpoints:
         name: requirements
         description: 'Must not be greater than 500 characters.'
         required: false
-        example: relqacxcplajqdrzmatvocmq
+        example: u
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -164,7 +155,7 @@ endpoints:
         name: position_type
         description: ''
         required: true
-        example: permanent
+        example: casual
         type: string
         enumValues:
           - permanent
@@ -175,18 +166,17 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      advertising_start_date: '2024-09-12'
-      advertising_end_date: '2024-09-12'
-      position_title: biiqttrbcziamm
-      position_description: shq
-      position_keywords: hqtqvlpb
-      minimum_salary: 72
-      maximum_salary: 81
-      salary_currency: gnw
-      company_id: quia
-      benefits: rxgxpykbnfkwvnemxvqiiiv
-      requirements: relqacxcplajqdrzmatvocmq
-      position_type: permanent
+      advertising_start_date: '2024-09-19'
+      advertising_end_date: '2024-09-19'
+      position_title: ryckmsbvubzoaqpzqo
+      position_description: qwmkqftbei
+      position_keywords: brdalrakvcwl
+      minimum_salary: 90
+      maximum_salary: 12
+      salary_currency: alp
+      benefits: zjlav
+      requirements: u
+      position_type: casual
     fileParameters: []
     responses: []
     responseFields: []
@@ -200,7 +190,7 @@ endpoints:
       - GET
     uri: 'api/positions/{id}'
     metadata:
-      groupName: Endpoints
+      groupName: Positions
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -216,13 +206,13 @@ endpoints:
         name: id
         description: 'The ID of the position.'
         required: true
-        example: 6
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      id: 6
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -230,8 +220,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 404
-        content: '{"success":false,"message":"Position not found","data":[]}'
+        status: 403
+        content: '{"success":true,"message":"Unauthorized","data":null}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -250,7 +240,7 @@ endpoints:
       - PATCH
     uri: 'api/positions/{id}'
     metadata:
-      groupName: Endpoints
+      groupName: Positions
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -266,13 +256,13 @@ endpoints:
         name: id
         description: 'The ID of the position.'
         required: true
-        example: 15
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      id: 15
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -290,7 +280,7 @@ endpoints:
       - DELETE
     uri: 'api/positions/{id}'
     metadata:
-      groupName: Endpoints
+      groupName: Positions
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -306,421 +296,13 @@ endpoints:
         name: id
         description: 'The ID of the position.'
         required: true
-        example: 11
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      id: 11
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/register
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: dbkeroreqwnelgpmshzbosjto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      email:
-        name: email
-        description: 'Must be a valid email address.'
-        required: true
-        example: erica.hartmann@example.net
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      password:
-        name: password
-        description: ''
-        required: true
-        example: autem
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-    cleanBodyParameters:
-      name: dbkeroreqwnelgpmshzbosjto
-      email: erica.hartmann@example.net
-      password: autem
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/login
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/logout
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - GET
-    uri: api/v1/companies
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Display a listing of the resource.'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: '{"success":true,"message":"Company retrieved successfully","data":[]}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - GET
-    uri: 'api/v1/companies/{id}'
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Display the specified resource.'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the company.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-    cleanUrlParameters:
-      id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 404
-        content: '{"success":false,"message":"Company not found","data":[]}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/companies
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Store a newly created resource in storage.'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: brpss
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      city:
-        name: city
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: upsiwnzhzeufpodgz
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      state:
-        name: state
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: lphvgtjqgbph
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      country:
-        name: country
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: hyuoqzleyxbmcrmjxglsdv
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      logo:
-        name: logo
-        description: 'Must not be greater than 255 characters.'
-        required: false
-        example: ponziiaahewtrnoenxebfyme
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-    cleanBodyParameters:
-      name: brpss
-      city: upsiwnzhzeufpodgz
-      state: lphvgtjqgbph
-      country: hyuoqzleyxbmcrmjxglsdv
-      logo: ponziiaahewtrnoenxebfyme
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - PUT
-    uri: 'api/v1/companies/{id}/update'
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Update the specified resource in storage.'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the company.'
-        required: true
-        example: 7
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-    cleanUrlParameters:
-      id: 7
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - DELETE
-    uri: 'api/v1/companies/{id}/delete'
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Remove the specified resource from storage.'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the company.'
-        required: true
-        example: 6
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-    cleanUrlParameters:
-      id: 6
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - PUT
-    uri: 'api/v1/companies/{id}/restore'
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the company.'
-        required: true
-        example: 15
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-    cleanUrlParameters:
-      id: 15
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -738,7 +320,7 @@ endpoints:
       - GET
     uri: api/v1/positions
     metadata:
-      groupName: Endpoints
+      groupName: Positions
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -758,8 +340,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"success":true,"message":"Positions retrieved successfully","data":[]}'
+        status: 401
+        content: '{"message":"Unauthenticated."}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -777,7 +359,7 @@ endpoints:
       - GET
     uri: 'api/v1/positions/{id}'
     metadata:
-      groupName: Endpoints
+      groupName: Positions
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -793,13 +375,13 @@ endpoints:
         name: id
         description: 'The ID of the position.'
         required: true
-        example: 11
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      id: 11
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -807,8 +389,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 404
-        content: '{"success":false,"message":"Position not found","data":[]}'
+        status: 401
+        content: '{"message":"Unauthenticated."}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -826,7 +408,7 @@ endpoints:
       - POST
     uri: api/v1/positions
     metadata:
-      groupName: Endpoints
+      groupName: Positions
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -846,7 +428,7 @@ endpoints:
         name: advertising_start_date
         description: 'Must be a valid date in the format <code>Y-m-d</code>.'
         required: true
-        example: '2024-09-12'
+        example: '2024-09-19'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -855,7 +437,7 @@ endpoints:
         name: advertising_end_date
         description: 'Must be a valid date in the format <code>Y-m-d</code>.'
         required: true
-        example: '2024-09-12'
+        example: '2024-09-19'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -864,7 +446,7 @@ endpoints:
         name: position_title
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: oyfjttkrqkhpvqvmtzplzpq
+        example: hrjwtpbxldun
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -873,7 +455,7 @@ endpoints:
         name: position_description
         description: 'Must not be greater than 500 characters.'
         required: true
-        example: dkolbirlwmrrlmnpksovzbd
+        example: v
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -882,7 +464,7 @@ endpoints:
         name: position_keywords
         description: 'Must not be greater than 255 characters.'
         required: false
-        example: xqxtjmhyunqrmdsetdtjdu
+        example: dkyzdcknysqmoflhsotrpo
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -891,7 +473,7 @@ endpoints:
         name: minimum_salary
         description: 'Must be at least 0.'
         required: true
-        example: 59
+        example: 31
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -900,7 +482,7 @@ endpoints:
         name: maximum_salary
         description: 'Must be at least 0.'
         required: true
-        example: 5
+        example: 30
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -909,16 +491,7 @@ endpoints:
         name: salary_currency
         description: 'Must be 3 characters.'
         required: true
-        example: hez
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      company_id:
-        name: company_id
-        description: ''
-        required: true
-        example: deserunt
+        example: tys
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -927,7 +500,7 @@ endpoints:
         name: benefits
         description: 'Must not be greater than 500 characters.'
         required: false
-        example: cywlccsk
+        example: noyptq
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -936,7 +509,7 @@ endpoints:
         name: requirements
         description: 'Must not be greater than 500 characters.'
         required: false
-        example: climoqmsktwmvwc
+        example: yvnyvdjllpshnhkl
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -956,17 +529,16 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      advertising_start_date: '2024-09-12'
-      advertising_end_date: '2024-09-12'
-      position_title: oyfjttkrqkhpvqvmtzplzpq
-      position_description: dkolbirlwmrrlmnpksovzbd
-      position_keywords: xqxtjmhyunqrmdsetdtjdu
-      minimum_salary: 59
-      maximum_salary: 5
-      salary_currency: hez
-      company_id: deserunt
-      benefits: cywlccsk
-      requirements: climoqmsktwmvwc
+      advertising_start_date: '2024-09-19'
+      advertising_end_date: '2024-09-19'
+      position_title: hrjwtpbxldun
+      position_description: v
+      position_keywords: dkyzdcknysqmoflhsotrpo
+      minimum_salary: 31
+      maximum_salary: 30
+      salary_currency: tys
+      benefits: noyptq
+      requirements: yvnyvdjllpshnhkl
       position_type: permanent
     fileParameters: []
     responses: []
@@ -981,7 +553,7 @@ endpoints:
       - PUT
     uri: 'api/v1/positions/{id}/update'
     metadata:
-      groupName: Endpoints
+      groupName: Positions
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -997,13 +569,13 @@ endpoints:
         name: id
         description: 'The ID of the position.'
         required: true
-        example: 19
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      id: 19
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1021,7 +593,7 @@ endpoints:
       - DELETE
     uri: 'api/v1/positions/{id}/delete'
     metadata:
-      groupName: Endpoints
+      groupName: Positions
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -1037,13 +609,43 @@ endpoints:
         name: id
         description: 'The ID of the position.'
         required: true
-        example: 5
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      id: 5
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: api/v1/positions/delete-all
+    metadata:
+      groupName: Positions
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Permanently delete all resources from storage.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1061,11 +663,11 @@ endpoints:
       - PUT
     uri: 'api/v1/positions/{id}/restore'
     metadata:
-      groupName: Endpoints
-      groupDescription: ''
+      groupName: Positions
+      groupDescription: .
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Restore the specified resource from storage.'
       description: ''
       authenticated: false
       custom: []
@@ -1077,289 +679,13 @@ endpoints:
         name: id
         description: 'The ID of the position.'
         required: true
-        example: 18
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      id: 18
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - GET
-    uri: api/v1/users
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Display a listing of the resource.'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: '{"success":true,"message":"Users retrieved successfully","data":[]}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - GET
-    uri: 'api/v1/users/{id}'
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Display the specified resource.'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the user.'
-        required: true
-        example: 5
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-    cleanUrlParameters:
-      id: 5
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 404
-        content: '{"success":false,"message":"User not found","data":[]}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/users
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Store a newly created resource in storage.'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      nickname:
-        name: nickname
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: qgznfrwnbtopdpimosxbtslm
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      given_name:
-        name: given_name
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: mtuwhcxhgsbmgouamoeluu
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      family_name:
-        name: family_name
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: sqqgzpalydbhxp
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      email:
-        name: email
-        description: 'Must not be greater than 500 characters.'
-        required: true
-        example: bell79@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      company_id:
-        name: company_id
-        description: ''
-        required: true
-        example: ut
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      user_type:
-        name: user_type
-        description: ''
-        required: true
-        example: applicant
-        type: string
-        enumValues:
-          - client
-          - staff
-          - applicant
-        exampleWasSpecified: false
-        custom: []
-      status:
-        name: status
-        description: ''
-        required: true
-        example: banned
-        type: string
-        enumValues:
-          - active
-          - unconfirmed
-          - suspended
-          - banned
-          - unknown
-        exampleWasSpecified: false
-        custom: []
-    cleanBodyParameters:
-      nickname: qgznfrwnbtopdpimosxbtslm
-      given_name: mtuwhcxhgsbmgouamoeluu
-      family_name: sqqgzpalydbhxp
-      email: bell79@example.com
-      company_id: ut
-      user_type: applicant
-      status: banned
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - PUT
-    uri: 'api/v1/users/{id}/update'
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Update the specified resource in storage.'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the user.'
-        required: true
-        example: 11
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-    cleanUrlParameters:
-      id: 11
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - DELETE
-    uri: 'api/v1/users/{id}/delete'
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Remove the specified resource from storage.'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the user.'
-        required: true
-        example: 4
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-    cleanUrlParameters:
-      id: 4
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1375,13 +701,43 @@ endpoints:
   -
     httpMethods:
       - PUT
-    uri: 'api/v1/users/{id}/restore'
+    uri: api/v1/positions/restore-all
     metadata:
-      groupName: Endpoints
+      groupName: Positions
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Restore all soft-deleted resources from storage.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: 'api/v1/positions/{id}/removeTrash'
+    metadata:
+      groupName: Positions
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Permanently delete the specified resource from trash.'
       description: ''
       authenticated: false
       custom: []
@@ -1391,7 +747,7 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the user.'
+        description: 'The ID of the position.'
         required: true
         example: 1
         type: integer
@@ -1400,6 +756,36 @@ endpoints:
         custom: []
     cleanUrlParameters:
       id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: api/v1/positions/removeTrash-all
+    metadata:
+      groupName: Positions
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Permanently delete all resources from trash.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

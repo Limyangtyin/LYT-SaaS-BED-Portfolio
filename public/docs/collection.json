@@ -5,19 +5,484 @@
             "key": "baseUrl",
             "type": "string",
             "name": "string",
-            "value": "http:\/\/localhost"
+            "value": "http:\/\/LYT-SaaS-BED-Portfolio.test"
         }
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "27b7ea9d-67e5-45ef-aeb8-152940117d16",
+        "_postman_id": "8dd40b08-28c4-4f2f-9f7a-37c1a20e0391",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
     "item": [
         {
+            "name": "Companies",
+            "description": "",
+            "item": [
+                {
+                    "name": "Display a listing of the resource",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/companies",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/companies"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Display the specified resource.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/companies\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/companies\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "perspiciatis",
+                                    "description": "The ID of the company."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Store a newly created resource in storage",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/companies",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/companies"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"cwgeqbraoxkhbyjkudlnnq\",\"city\":\"qtaktkophlh\",\"state\":\"e\",\"country\":\"mwmawjeaagqdnibm\",\"logo\":\"smqhpqwuaywdykkh\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update the specified resource in storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/companies\/:id\/update",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/companies\/:id\/update",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "facilis",
+                                    "description": "The ID of the company."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Remove the specified resource from storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/companies\/:id\/delete",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/companies\/:id\/delete",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "numquam",
+                                    "description": "The ID of the company."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Permanently delete all resources from storage",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/companies\/delete-all",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/companies\/delete-all"
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Restore the specified resource from storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/companies\/:id\/restore",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/companies\/:id\/restore",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "molestiae",
+                                    "description": "The ID of the company."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Restore all soft-deleted resources from storage",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/companies\/restore-all",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/companies\/restore-all"
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Permanently delete the specified resource from trash",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/companies\/:id\/removeTrash",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/companies\/:id\/removeTrash",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "omnis",
+                                    "description": "The ID of the company."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Permanently delete all resource from trash",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/companies\/removeTrash-all",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/companies\/removeTrash-all"
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
             "name": "Endpoints",
             "description": "",
+            "item": [
+                {
+                    "name": "POST api\/register",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/register",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/register"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"nickname\":\"rocoablehniclhygwoqqx\",\"given_name\":\"biackrlcs\",\"family_name\":\"ilvosqhs\",\"user_type\":\"applicant\",\"status\":\"active\",\"email\":\"kaitlin72@example.net\",\"password\":\"repellendus\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/login",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"patsy.stark@example.com\",\"password\":\"repellat\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/logout",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/logout",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/logout"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Positions",
+            "description": ".",
             "item": [
                 {
                     "name": "Display a listing of the resource.",
@@ -62,7 +527,7 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "{\"success\":true,\"message\":\"Positions retrieved successfully\",\"data\":[]}",
+                            "body": "{\"success\":true,\"message\":\"Positions retrieved successfully\",\"data\":[{\"id\":1,\"advertising_start_date\":\"2020-10-10\",\"advertising_end_date\":\"2020-12-12\",\"position_title\":\"asldkm\",\"position_description\":\"apsokd\",\"position_keywords\":\"asd\",\"minimum_salary\":1000,\"maximum_salary\":5000,\"salary_currency\":\"AUD\",\"company_id\":1,\"user_id\":1,\"benefits\":null,\"requirements\":null,\"position_type\":\"contract\",\"created_at\":\"2024-09-19T08:32:24.000000Z\",\"updated_at\":\"2024-09-19T08:32:24.000000Z\",\"deleted_at\":null}]}",
                             "name": ""
                         }
                     ]
@@ -89,7 +554,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"advertising_start_date\":\"2024-09-12\",\"advertising_end_date\":\"2024-09-12\",\"position_title\":\"biiqttrbcziamm\",\"position_description\":\"shq\",\"position_keywords\":\"hqtqvlpb\",\"minimum_salary\":72,\"maximum_salary\":81,\"salary_currency\":\"gnw\",\"company_id\":\"quia\",\"benefits\":\"rxgxpykbnfkwvnemxvqiiiv\",\"requirements\":\"relqacxcplajqdrzmatvocmq\",\"position_type\":\"permanent\"}"
+                            "raw": "{\"advertising_start_date\":\"2024-09-19\",\"advertising_end_date\":\"2024-09-19\",\"position_title\":\"ryckmsbvubzoaqpzqo\",\"position_description\":\"qwmkqftbei\",\"position_keywords\":\"brdalrakvcwl\",\"minimum_salary\":90,\"maximum_salary\":12,\"salary_currency\":\"alp\",\"benefits\":\"zjlav\",\"requirements\":\"u\",\"position_type\":\"casual\"}"
                         },
                         "description": "",
                         "auth": {
@@ -110,7 +575,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "6",
+                                    "value": "1",
                                     "description": "The ID of the position."
                                 }
                             ]
@@ -148,8 +613,8 @@
                                     "value": "*"
                                 }
                             ],
-                            "code": 404,
-                            "body": "{\"success\":false,\"message\":\"Position not found\",\"data\":[]}",
+                            "code": 403,
+                            "body": "{\"success\":true,\"message\":\"Unauthorized\",\"data\":null}",
                             "name": ""
                         }
                     ]
@@ -166,7 +631,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "15",
+                                    "value": "1",
                                     "description": "The ID of the position."
                                 }
                             ]
@@ -202,342 +667,12 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "11",
+                                    "value": "1",
                                     "description": "The ID of the position."
                                 }
                             ]
                         },
                         "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "POST api\/register",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/register",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/register"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"name\":\"dbkeroreqwnelgpmshzbosjto\",\"email\":\"erica.hartmann@example.net\",\"password\":\"autem\"}"
-                        },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "POST api\/login",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/login",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/login"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "POST api\/logout",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/logout",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/logout"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Display a listing of the resource.",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/companies",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/companies"
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": [
-                        {
-                            "header": [
-                                {
-                                    "key": "cache-control",
-                                    "value": "no-cache, private"
-                                },
-                                {
-                                    "key": "content-type",
-                                    "value": "application\/json"
-                                },
-                                {
-                                    "key": "access-control-allow-origin",
-                                    "value": "*"
-                                }
-                            ],
-                            "code": 200,
-                            "body": "{\"success\":true,\"message\":\"Company retrieved successfully\",\"data\":[]}",
-                            "name": ""
-                        }
-                    ]
-                },
-                {
-                    "name": "Display the specified resource.",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/companies\/:id",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/companies\/:id",
-                            "variable": [
-                                {
-                                    "id": "id",
-                                    "key": "id",
-                                    "value": "16",
-                                    "description": "The ID of the company."
-                                }
-                            ]
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": [
-                        {
-                            "header": [
-                                {
-                                    "key": "cache-control",
-                                    "value": "no-cache, private"
-                                },
-                                {
-                                    "key": "content-type",
-                                    "value": "application\/json"
-                                },
-                                {
-                                    "key": "access-control-allow-origin",
-                                    "value": "*"
-                                }
-                            ],
-                            "code": 404,
-                            "body": "{\"success\":false,\"message\":\"Company not found\",\"data\":[]}",
-                            "name": ""
-                        }
-                    ]
-                },
-                {
-                    "name": "Store a newly created resource in storage.",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/companies",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/companies"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"name\":\"brpss\",\"city\":\"upsiwnzhzeufpodgz\",\"state\":\"lphvgtjqgbph\",\"country\":\"hyuoqzleyxbmcrmjxglsdv\",\"logo\":\"ponziiaahewtrnoenxebfyme\"}"
-                        },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Update the specified resource in storage.",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/companies\/:id\/update",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/companies\/:id\/update",
-                            "variable": [
-                                {
-                                    "id": "id",
-                                    "key": "id",
-                                    "value": "7",
-                                    "description": "The ID of the company."
-                                }
-                            ]
-                        },
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Remove the specified resource from storage.",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/companies\/:id\/delete",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/companies\/:id\/delete",
-                            "variable": [
-                                {
-                                    "id": "id",
-                                    "key": "id",
-                                    "value": "6",
-                                    "description": "The ID of the company."
-                                }
-                            ]
-                        },
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "PUT api\/v1\/companies\/{id}\/restore",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/companies\/:id\/restore",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/companies\/:id\/restore",
-                            "variable": [
-                                {
-                                    "id": "id",
-                                    "key": "id",
-                                    "value": "15",
-                                    "description": "The ID of the company."
-                                }
-                            ]
-                        },
-                        "method": "PUT",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -598,8 +733,8 @@
                                     "value": "*"
                                 }
                             ],
-                            "code": 200,
-                            "body": "{\"success\":true,\"message\":\"Positions retrieved successfully\",\"data\":[]}",
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
                             "name": ""
                         }
                     ]
@@ -616,7 +751,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "11",
+                                    "value": "1",
                                     "description": "The ID of the position."
                                 }
                             ]
@@ -654,8 +789,8 @@
                                     "value": "*"
                                 }
                             ],
-                            "code": 404,
-                            "body": "{\"success\":false,\"message\":\"Position not found\",\"data\":[]}",
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
                             "name": ""
                         }
                     ]
@@ -682,7 +817,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"advertising_start_date\":\"2024-09-12\",\"advertising_end_date\":\"2024-09-12\",\"position_title\":\"oyfjttkrqkhpvqvmtzplzpq\",\"position_description\":\"dkolbirlwmrrlmnpksovzbd\",\"position_keywords\":\"xqxtjmhyunqrmdsetdtjdu\",\"minimum_salary\":59,\"maximum_salary\":5,\"salary_currency\":\"hez\",\"company_id\":\"deserunt\",\"benefits\":\"cywlccsk\",\"requirements\":\"climoqmsktwmvwc\",\"position_type\":\"permanent\"}"
+                            "raw": "{\"advertising_start_date\":\"2024-09-19\",\"advertising_end_date\":\"2024-09-19\",\"position_title\":\"hrjwtpbxldun\",\"position_description\":\"v\",\"position_keywords\":\"dkyzdcknysqmoflhsotrpo\",\"minimum_salary\":31,\"maximum_salary\":30,\"salary_currency\":\"tys\",\"benefits\":\"noyptq\",\"requirements\":\"yvnyvdjllpshnhkl\",\"position_type\":\"permanent\"}"
                         },
                         "description": "",
                         "auth": {
@@ -703,7 +838,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "19",
+                                    "value": "1",
                                     "description": "The ID of the position."
                                 }
                             ]
@@ -739,7 +874,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "5",
+                                    "value": "1",
                                     "description": "The ID of the position."
                                 }
                             ]
@@ -764,7 +899,35 @@
                     "response": []
                 },
                 {
-                    "name": "PUT api\/v1\/positions\/{id}\/restore",
+                    "name": "Permanently delete all resources from storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/positions\/delete-all",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/positions\/delete-all"
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Restore the specified resource from storage.",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -775,7 +938,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "18",
+                                    "value": "1",
                                     "description": "The ID of the position."
                                 }
                             ]
@@ -799,6 +962,104 @@
                     },
                     "response": []
                 },
+                {
+                    "name": "Restore all soft-deleted resources from storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/positions\/restore-all",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/positions\/restore-all"
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Permanently delete the specified resource from trash.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/positions\/:id\/removeTrash",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/positions\/:id\/removeTrash",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the position."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Permanently delete all resources from trash.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/positions\/removeTrash-all",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/positions\/removeTrash-all"
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Users",
+            "description": "",
+            "item": [
                 {
                     "name": "Display a listing of the resource.",
                     "request": {
@@ -841,8 +1102,8 @@
                                     "value": "*"
                                 }
                             ],
-                            "code": 200,
-                            "body": "{\"success\":true,\"message\":\"Users retrieved successfully\",\"data\":[]}",
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
                             "name": ""
                         }
                     ]
@@ -859,7 +1120,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "5",
+                                    "value": "beatae",
                                     "description": "The ID of the user."
                                 }
                             ]
@@ -897,8 +1158,8 @@
                                     "value": "*"
                                 }
                             ],
-                            "code": 404,
-                            "body": "{\"success\":false,\"message\":\"User not found\",\"data\":[]}",
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
                             "name": ""
                         }
                     ]
@@ -925,7 +1186,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"nickname\":\"qgznfrwnbtopdpimosxbtslm\",\"given_name\":\"mtuwhcxhgsbmgouamoeluu\",\"family_name\":\"sqqgzpalydbhxp\",\"email\":\"bell79@example.com\",\"company_id\":\"ut\",\"user_type\":\"applicant\",\"status\":\"banned\"}"
+                            "raw": "{\"nickname\":\"xgstkpre\",\"given_name\":\"rxahyiqzrwqljjkd\",\"family_name\":\"sc\",\"email\":\"gussie.smitham@example.net\",\"user_type\":\"staff\",\"status\":\"active\",\"password\":\"deserunt\"}"
                         },
                         "description": "",
                         "auth": {
@@ -946,7 +1207,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "11",
+                                    "value": "inventore",
                                     "description": "The ID of the user."
                                 }
                             ]
@@ -982,7 +1243,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "4",
+                                    "value": "voluptas",
                                     "description": "The ID of the user."
                                 }
                             ]
@@ -1007,7 +1268,35 @@
                     "response": []
                 },
                 {
-                    "name": "PUT api\/v1\/users\/{id}\/restore",
+                    "name": "Remove all users from storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/users\/delete-all",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/users\/delete-all"
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Restore the specified resource from storage.",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -1018,10 +1307,102 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "1",
+                                    "value": "voluptatem",
                                     "description": "The ID of the user."
                                 }
                             ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Restore all users from storage",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/users\/restore-all",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/users\/restore-all"
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Remove the specified user from trash",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/users\/:id\/removeTrash",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/users\/:id\/removeTrash",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "molestiae",
+                                    "description": "The ID of the user."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Remove all users from trash",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/users\/removeTrash-all",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/users\/removeTrash-all"
                         },
                         "method": "PUT",
                         "header": [

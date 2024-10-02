@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('state')->index();
             $table->string('country')->index();
             $table->string('logo')->nullable();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
 

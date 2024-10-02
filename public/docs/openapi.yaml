@@ -5,46 +5,38 @@ info:
   version: 1.0.0
 servers:
   -
-    url: 'http://localhost'
+    url: 'http://LYT-SaaS-BED-Portfolio.test'
 paths:
-  /api/positions:
+  /api/v1/companies:
     get:
-      summary: 'Display a listing of the resource.'
+      summary: 'Display a listing of the resource'
       operationId: displayAListingOfTheResource
       description: ''
       parameters: []
       responses:
-        200:
+        401:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  success: true
-                  message: 'Positions retrieved successfully'
-                  data: []
+                  message: Unauthenticated.
                 properties:
-                  success:
-                    type: boolean
-                    example: true
                   message:
                     type: string
-                    example: 'Positions retrieved successfully'
-                  data:
-                    type: array
-                    example: []
+                    example: Unauthenticated.
       tags:
-        - Endpoints
+        - Companies
       security: []
     post:
-      summary: 'Store a newly created resource in storage.'
+      summary: 'Store a newly created resource in storage'
       operationId: storeANewlyCreatedResourceInStorage
       description: ''
       parameters: []
       responses: {  }
       tags:
-        - Endpoints
+        - Companies
       requestBody:
         required: true
         content:
@@ -52,101 +44,64 @@ paths:
             schema:
               type: object
               properties:
-                advertising_start_date:
-                  type: string
-                  description: 'Must be a valid date in the format <code>Y-m-d</code>.'
-                  example: '2024-09-12'
-                advertising_end_date:
-                  type: string
-                  description: 'Must be a valid date in the format <code>Y-m-d</code>.'
-                  example: '2024-09-12'
-                position_title:
+                name:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: biiqttrbcziamm
-                position_description:
-                  type: string
-                  description: 'Must not be greater than 500 characters.'
-                  example: shq
-                position_keywords:
+                  example: cwgeqbraoxkhbyjkudlnnq
+                city:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: hqtqvlpb
-                minimum_salary:
-                  type: number
-                  description: 'Must be at least 0.'
-                  example: 72
-                maximum_salary:
-                  type: number
-                  description: 'Must be at least 0.'
-                  example: 81
-                salary_currency:
+                  example: qtaktkophlh
+                state:
                   type: string
-                  description: 'Must be 3 characters.'
-                  example: gnw
-                company_id:
+                  description: 'Must not be greater than 255 characters.'
+                  example: e
+                country:
                   type: string
-                  description: ''
-                  example: quia
-                benefits:
+                  description: 'Must not be greater than 255 characters.'
+                  example: mwmawjeaagqdnibm
+                logo:
                   type: string
-                  description: 'Must not be greater than 500 characters.'
-                  example: rxgxpykbnfkwvnemxvqiiiv
-                requirements:
-                  type: string
-                  description: 'Must not be greater than 500 characters.'
-                  example: relqacxcplajqdrzmatvocmq
-                position_type:
-                  type: string
-                  description: ''
-                  example: permanent
-                  enum:
-                    - permanent
-                    - contract
-                    - part-time
-                    - casual
-                    - internship
+                  description: 'Must not be greater than 255 characters.'
+                  example: smqhpqwuaywdykkh
               required:
-                - advertising_start_date
-                - advertising_end_date
-                - position_title
-                - position_description
-                - minimum_salary
-                - maximum_salary
-                - salary_currency
-                - company_id
-                - position_type
+                - name
+                - city
+                - state
+                - country
       security: []
-  '/api/positions/{id}':
+  '/api/v1/companies/{id}':
     get:
       summary: 'Display the specified resource.'
       operationId: displayTheSpecifiedResource
       description: ''
       parameters: []
       responses:
-        404:
+        401:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  success: false
-                  message: 'Position not found'
-                  data: []
+                  message: Unauthenticated.
                 properties:
-                  success:
-                    type: boolean
-                    example: false
                   message:
                     type: string
-                    example: 'Position not found'
-                  data:
-                    type: array
-                    example: []
+                    example: Unauthenticated.
       tags:
-        - Endpoints
+        - Companies
       security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the company.'
+        example: perspiciatis
+        required: true
+        schema:
+          type: string
+  '/api/v1/companies/{id}/update':
     put:
       summary: 'Update the specified resource in storage.'
       operationId: updateTheSpecifiedResourceInStorage
@@ -154,8 +109,18 @@ paths:
       parameters: []
       responses: {  }
       tags:
-        - Endpoints
+        - Companies
       security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the company.'
+        example: facilis
+        required: true
+        schema:
+          type: string
+  '/api/v1/companies/{id}/delete':
     delete:
       summary: 'Remove the specified resource from storage.'
       operationId: removeTheSpecifiedResourceFromStorage
@@ -163,17 +128,85 @@ paths:
       parameters: []
       responses: {  }
       tags:
-        - Endpoints
+        - Companies
       security: []
     parameters:
       -
         in: path
         name: id
-        description: 'The ID of the position.'
-        example: 6
+        description: 'The ID of the company.'
+        example: numquam
         required: true
         schema:
-          type: integer
+          type: string
+  /api/v1/companies/delete-all:
+    delete:
+      summary: 'Permanently delete all resources from storage'
+      operationId: permanentlyDeleteAllResourcesFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Companies
+      security: []
+  '/api/v1/companies/{id}/restore':
+    put:
+      summary: 'Restore the specified resource from storage.'
+      operationId: restoreTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Companies
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the company.'
+        example: molestiae
+        required: true
+        schema:
+          type: string
+  /api/v1/companies/restore-all:
+    put:
+      summary: 'Restore all soft-deleted resources from storage'
+      operationId: restoreAllSoftDeletedResourcesFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Companies
+      security: []
+  '/api/v1/companies/{id}/removeTrash':
+    put:
+      summary: 'Permanently delete the specified resource from trash'
+      operationId: permanentlyDeleteTheSpecifiedResourceFromTrash
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Companies
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the company.'
+        example: omnis
+        required: true
+        schema:
+          type: string
+  /api/v1/companies/removeTrash-all:
+    put:
+      summary: 'Permanently delete all resource from trash'
+      operationId: permanentlyDeleteAllResourceFromTrash
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Companies
+      security: []
   /api/register:
     post:
       summary: ''
@@ -190,20 +223,50 @@ paths:
             schema:
               type: object
               properties:
-                name:
+                nickname:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: dbkeroreqwnelgpmshzbosjto
+                  example: rocoablehniclhygwoqqx
+                given_name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: biackrlcs
+                family_name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: ilvosqhs
+                user_type:
+                  type: string
+                  description: ''
+                  example: applicant
+                  enum:
+                    - client
+                    - staff
+                    - applicant
+                status:
+                  type: string
+                  description: ''
+                  example: active
+                  enum:
+                    - active
+                    - unconfirmed
+                    - suspended
+                    - banned
+                    - unknown
                 email:
                   type: string
                   description: 'Must be a valid email address.'
-                  example: erica.hartmann@example.net
+                  example: kaitlin72@example.net
                 password:
                   type: string
                   description: ''
-                  example: autem
+                  example: repellendus
               required:
-                - name
+                - nickname
+                - given_name
+                - family_name
+                - user_type
+                - status
                 - email
                 - password
       security: []
@@ -216,6 +279,24 @@ paths:
       responses: {  }
       tags:
         - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: patsy.stark@example.com
+                password:
+                  type: string
+                  description: ''
+                  example: repellat
+              required:
+                - email
+                - password
       security: []
   /api/logout:
     post:
@@ -227,174 +308,7 @@ paths:
       tags:
         - Endpoints
       security: []
-  /api/v1/companies:
-    get:
-      summary: 'Display a listing of the resource.'
-      operationId: displayAListingOfTheResource
-      description: ''
-      parameters: []
-      responses:
-        200:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  success: true
-                  message: 'Company retrieved successfully'
-                  data: []
-                properties:
-                  success:
-                    type: boolean
-                    example: true
-                  message:
-                    type: string
-                    example: 'Company retrieved successfully'
-                  data:
-                    type: array
-                    example: []
-      tags:
-        - Endpoints
-      security: []
-    post:
-      summary: 'Store a newly created resource in storage.'
-      operationId: storeANewlyCreatedResourceInStorage
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: brpss
-                city:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: upsiwnzhzeufpodgz
-                state:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: lphvgtjqgbph
-                country:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: hyuoqzleyxbmcrmjxglsdv
-                logo:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: ponziiaahewtrnoenxebfyme
-              required:
-                - name
-                - city
-                - state
-                - country
-      security: []
-  '/api/v1/companies/{id}':
-    get:
-      summary: 'Display the specified resource.'
-      operationId: displayTheSpecifiedResource
-      description: ''
-      parameters: []
-      responses:
-        404:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  success: false
-                  message: 'Company not found'
-                  data: []
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: 'Company not found'
-                  data:
-                    type: array
-                    example: []
-      tags:
-        - Endpoints
-      security: []
-    parameters:
-      -
-        in: path
-        name: id
-        description: 'The ID of the company.'
-        example: 16
-        required: true
-        schema:
-          type: integer
-  '/api/v1/companies/{id}/update':
-    put:
-      summary: 'Update the specified resource in storage.'
-      operationId: updateTheSpecifiedResourceInStorage
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      security: []
-    parameters:
-      -
-        in: path
-        name: id
-        description: 'The ID of the company.'
-        example: 7
-        required: true
-        schema:
-          type: integer
-  '/api/v1/companies/{id}/delete':
-    delete:
-      summary: 'Remove the specified resource from storage.'
-      operationId: removeTheSpecifiedResourceFromStorage
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      security: []
-    parameters:
-      -
-        in: path
-        name: id
-        description: 'The ID of the company.'
-        example: 6
-        required: true
-        schema:
-          type: integer
-  '/api/v1/companies/{id}/restore':
-    put:
-      summary: ''
-      operationId: putApiV1CompaniesIdRestore
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      security: []
-    parameters:
-      -
-        in: path
-        name: id
-        description: 'The ID of the company.'
-        example: 15
-        required: true
-        schema:
-          type: integer
-  /api/v1/positions:
+  /api/positions:
     get:
       summary: 'Display a listing of the resource.'
       operationId: displayAListingOfTheResource
@@ -410,7 +324,25 @@ paths:
                 example:
                   success: true
                   message: 'Positions retrieved successfully'
-                  data: []
+                  data:
+                    -
+                      id: 1
+                      advertising_start_date: '2020-10-10'
+                      advertising_end_date: '2020-12-12'
+                      position_title: asldkm
+                      position_description: apsokd
+                      position_keywords: asd
+                      minimum_salary: 1000
+                      maximum_salary: 5000
+                      salary_currency: AUD
+                      company_id: 1
+                      user_id: 1
+                      benefits: null
+                      requirements: null
+                      position_type: contract
+                      created_at: '2024-09-19T08:32:24.000000Z'
+                      updated_at: '2024-09-19T08:32:24.000000Z'
+                      deleted_at: null
                 properties:
                   success:
                     type: boolean
@@ -420,9 +352,81 @@ paths:
                     example: 'Positions retrieved successfully'
                   data:
                     type: array
-                    example: []
+                    example:
+                      -
+                        id: 1
+                        advertising_start_date: '2020-10-10'
+                        advertising_end_date: '2020-12-12'
+                        position_title: asldkm
+                        position_description: apsokd
+                        position_keywords: asd
+                        minimum_salary: 1000
+                        maximum_salary: 5000
+                        salary_currency: AUD
+                        company_id: 1
+                        user_id: 1
+                        benefits: null
+                        requirements: null
+                        position_type: contract
+                        created_at: '2024-09-19T08:32:24.000000Z'
+                        updated_at: '2024-09-19T08:32:24.000000Z'
+                        deleted_at: null
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        advertising_start_date:
+                          type: string
+                          example: '2020-10-10'
+                        advertising_end_date:
+                          type: string
+                          example: '2020-12-12'
+                        position_title:
+                          type: string
+                          example: asldkm
+                        position_description:
+                          type: string
+                          example: apsokd
+                        position_keywords:
+                          type: string
+                          example: asd
+                        minimum_salary:
+                          type: integer
+                          example: 1000
+                        maximum_salary:
+                          type: integer
+                          example: 5000
+                        salary_currency:
+                          type: string
+                          example: AUD
+                        company_id:
+                          type: integer
+                          example: 1
+                        user_id:
+                          type: integer
+                          example: 1
+                        benefits:
+                          type: string
+                          example: null
+                        requirements:
+                          type: string
+                          example: null
+                        position_type:
+                          type: string
+                          example: contract
+                        created_at:
+                          type: string
+                          example: '2024-09-19T08:32:24.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2024-09-19T08:32:24.000000Z'
+                        deleted_at:
+                          type: string
+                          example: null
       tags:
-        - Endpoints
+        - Positions
       security: []
     post:
       summary: 'Store a newly created resource in storage.'
@@ -431,7 +435,7 @@ paths:
       parameters: []
       responses: {  }
       tags:
-        - Endpoints
+        - Positions
       requestBody:
         required: true
         content:
@@ -442,47 +446,197 @@ paths:
                 advertising_start_date:
                   type: string
                   description: 'Must be a valid date in the format <code>Y-m-d</code>.'
-                  example: '2024-09-12'
+                  example: '2024-09-19'
                 advertising_end_date:
                   type: string
                   description: 'Must be a valid date in the format <code>Y-m-d</code>.'
-                  example: '2024-09-12'
+                  example: '2024-09-19'
                 position_title:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: oyfjttkrqkhpvqvmtzplzpq
+                  example: ryckmsbvubzoaqpzqo
                 position_description:
                   type: string
                   description: 'Must not be greater than 500 characters.'
-                  example: dkolbirlwmrrlmnpksovzbd
+                  example: qwmkqftbei
                 position_keywords:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: xqxtjmhyunqrmdsetdtjdu
+                  example: brdalrakvcwl
                 minimum_salary:
                   type: number
                   description: 'Must be at least 0.'
-                  example: 59
+                  example: 90
                 maximum_salary:
                   type: number
                   description: 'Must be at least 0.'
-                  example: 5
+                  example: 12
                 salary_currency:
                   type: string
                   description: 'Must be 3 characters.'
-                  example: hez
-                company_id:
-                  type: string
-                  description: ''
-                  example: deserunt
+                  example: alp
                 benefits:
                   type: string
                   description: 'Must not be greater than 500 characters.'
-                  example: cywlccsk
+                  example: zjlav
                 requirements:
                   type: string
                   description: 'Must not be greater than 500 characters.'
-                  example: climoqmsktwmvwc
+                  example: u
+                position_type:
+                  type: string
+                  description: ''
+                  example: casual
+                  enum:
+                    - permanent
+                    - contract
+                    - part-time
+                    - casual
+                    - internship
+              required:
+                - advertising_start_date
+                - advertising_end_date
+                - position_title
+                - position_description
+                - minimum_salary
+                - maximum_salary
+                - salary_currency
+                - position_type
+      security: []
+  '/api/positions/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses:
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: Unauthorized
+                  data: null
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Unauthorized
+                  data:
+                    type: string
+                    example: null
+      tags:
+        - Positions
+      security: []
+    put:
+      summary: 'Update the specified resource in storage.'
+      operationId: updateTheSpecifiedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Positions
+      security: []
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Positions
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the position.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/v1/positions:
+    get:
+      summary: 'Display a listing of the resource.'
+      operationId: displayAListingOfTheResource
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Positions
+      security: []
+    post:
+      summary: 'Store a newly created resource in storage.'
+      operationId: storeANewlyCreatedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Positions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                advertising_start_date:
+                  type: string
+                  description: 'Must be a valid date in the format <code>Y-m-d</code>.'
+                  example: '2024-09-19'
+                advertising_end_date:
+                  type: string
+                  description: 'Must be a valid date in the format <code>Y-m-d</code>.'
+                  example: '2024-09-19'
+                position_title:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: hrjwtpbxldun
+                position_description:
+                  type: string
+                  description: 'Must not be greater than 500 characters.'
+                  example: v
+                position_keywords:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: dkyzdcknysqmoflhsotrpo
+                minimum_salary:
+                  type: number
+                  description: 'Must be at least 0.'
+                  example: 31
+                maximum_salary:
+                  type: number
+                  description: 'Must be at least 0.'
+                  example: 30
+                salary_currency:
+                  type: string
+                  description: 'Must be 3 characters.'
+                  example: tys
+                benefits:
+                  type: string
+                  description: 'Must not be greater than 500 characters.'
+                  example: noyptq
+                requirements:
+                  type: string
+                  description: 'Must not be greater than 500 characters.'
+                  example: yvnyvdjllpshnhkl
                 position_type:
                   type: string
                   description: ''
@@ -501,7 +655,6 @@ paths:
                 - minimum_salary
                 - maximum_salary
                 - salary_currency
-                - company_id
                 - position_type
       security: []
   '/api/v1/positions/{id}':
@@ -511,35 +664,27 @@ paths:
       description: ''
       parameters: []
       responses:
-        404:
+        401:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  success: false
-                  message: 'Position not found'
-                  data: []
+                  message: Unauthenticated.
                 properties:
-                  success:
-                    type: boolean
-                    example: false
                   message:
                     type: string
-                    example: 'Position not found'
-                  data:
-                    type: array
-                    example: []
+                    example: Unauthenticated.
       tags:
-        - Endpoints
+        - Positions
       security: []
     parameters:
       -
         in: path
         name: id
         description: 'The ID of the position.'
-        example: 11
+        example: 1
         required: true
         schema:
           type: integer
@@ -551,14 +696,14 @@ paths:
       parameters: []
       responses: {  }
       tags:
-        - Endpoints
+        - Positions
       security: []
     parameters:
       -
         in: path
         name: id
         description: 'The ID of the position.'
-        example: 19
+        example: 1
         required: true
         schema:
           type: integer
@@ -570,36 +715,85 @@ paths:
       parameters: []
       responses: {  }
       tags:
-        - Endpoints
+        - Positions
       security: []
     parameters:
       -
         in: path
         name: id
         description: 'The ID of the position.'
-        example: 5
+        example: 1
         required: true
         schema:
           type: integer
-  '/api/v1/positions/{id}/restore':
-    put:
-      summary: ''
-      operationId: putApiV1PositionsIdRestore
+  /api/v1/positions/delete-all:
+    delete:
+      summary: 'Permanently delete all resources from storage.'
+      operationId: permanentlyDeleteAllResourcesFromStorage
       description: ''
       parameters: []
       responses: {  }
       tags:
-        - Endpoints
+        - Positions
+      security: []
+  '/api/v1/positions/{id}/restore':
+    put:
+      summary: 'Restore the specified resource from storage.'
+      operationId: restoreTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Positions
       security: []
     parameters:
       -
         in: path
         name: id
         description: 'The ID of the position.'
-        example: 18
+        example: 1
         required: true
         schema:
           type: integer
+  /api/v1/positions/restore-all:
+    put:
+      summary: 'Restore all soft-deleted resources from storage.'
+      operationId: restoreAllSoftDeletedResourcesFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Positions
+      security: []
+  '/api/v1/positions/{id}/removeTrash':
+    put:
+      summary: 'Permanently delete the specified resource from trash.'
+      operationId: permanentlyDeleteTheSpecifiedResourceFromTrash
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Positions
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the position.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/v1/positions/removeTrash-all:
+    put:
+      summary: 'Permanently delete all resources from trash.'
+      operationId: permanentlyDeleteAllResourcesFromTrash
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Positions
+      security: []
   /api/v1/users:
     get:
       summary: 'Display a listing of the resource.'
@@ -607,28 +801,20 @@ paths:
       description: ''
       parameters: []
       responses:
-        200:
+        401:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  success: true
-                  message: 'Users retrieved successfully'
-                  data: []
+                  message: Unauthenticated.
                 properties:
-                  success:
-                    type: boolean
-                    example: true
                   message:
                     type: string
-                    example: 'Users retrieved successfully'
-                  data:
-                    type: array
-                    example: []
+                    example: Unauthenticated.
       tags:
-        - Endpoints
+        - Users
       security: []
     post:
       summary: 'Store a newly created resource in storage.'
@@ -637,7 +823,7 @@ paths:
       parameters: []
       responses: {  }
       tags:
-        - Endpoints
+        - Users
       requestBody:
         required: true
         content:
@@ -648,27 +834,23 @@ paths:
                 nickname:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: qgznfrwnbtopdpimosxbtslm
+                  example: xgstkpre
                 given_name:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: mtuwhcxhgsbmgouamoeluu
+                  example: rxahyiqzrwqljjkd
                 family_name:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: sqqgzpalydbhxp
+                  example: sc
                 email:
                   type: string
                   description: 'Must not be greater than 500 characters.'
-                  example: bell79@example.com
-                company_id:
-                  type: string
-                  description: ''
-                  example: ut
+                  example: gussie.smitham@example.net
                 user_type:
                   type: string
                   description: ''
-                  example: applicant
+                  example: staff
                   enum:
                     - client
                     - staff
@@ -676,21 +858,25 @@ paths:
                 status:
                   type: string
                   description: ''
-                  example: banned
+                  example: active
                   enum:
                     - active
                     - unconfirmed
                     - suspended
                     - banned
                     - unknown
+                password:
+                  type: string
+                  description: ''
+                  example: deserunt
               required:
                 - nickname
                 - given_name
                 - family_name
                 - email
-                - company_id
                 - user_type
                 - status
+                - password
       security: []
   '/api/v1/users/{id}':
     get:
@@ -699,38 +885,30 @@ paths:
       description: ''
       parameters: []
       responses:
-        404:
+        401:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  success: false
-                  message: 'User not found'
-                  data: []
+                  message: Unauthenticated.
                 properties:
-                  success:
-                    type: boolean
-                    example: false
                   message:
                     type: string
-                    example: 'User not found'
-                  data:
-                    type: array
-                    example: []
+                    example: Unauthenticated.
       tags:
-        - Endpoints
+        - Users
       security: []
     parameters:
       -
         in: path
         name: id
         description: 'The ID of the user.'
-        example: 5
+        example: beatae
         required: true
         schema:
-          type: integer
+          type: string
   '/api/v1/users/{id}/update':
     put:
       summary: 'Update the specified resource in storage.'
@@ -739,17 +917,17 @@ paths:
       parameters: []
       responses: {  }
       tags:
-        - Endpoints
+        - Users
       security: []
     parameters:
       -
         in: path
         name: id
         description: 'The ID of the user.'
-        example: 11
+        example: inventore
         required: true
         schema:
-          type: integer
+          type: string
   '/api/v1/users/{id}/delete':
     delete:
       summary: 'Remove the specified resource from storage.'
@@ -758,37 +936,95 @@ paths:
       parameters: []
       responses: {  }
       tags:
-        - Endpoints
+        - Users
       security: []
     parameters:
       -
         in: path
         name: id
         description: 'The ID of the user.'
-        example: 4
+        example: voluptas
         required: true
         schema:
-          type: integer
-  '/api/v1/users/{id}/restore':
-    put:
-      summary: ''
-      operationId: putApiV1UsersIdRestore
+          type: string
+  /api/v1/users/delete-all:
+    delete:
+      summary: 'Remove all users from storage.'
+      operationId: removeAllUsersFromStorage
       description: ''
       parameters: []
       responses: {  }
       tags:
-        - Endpoints
+        - Users
+      security: []
+  '/api/v1/users/{id}/restore':
+    put:
+      summary: 'Restore the specified resource from storage.'
+      operationId: restoreTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Users
       security: []
     parameters:
       -
         in: path
         name: id
         description: 'The ID of the user.'
-        example: 1
+        example: voluptatem
         required: true
         schema:
-          type: integer
+          type: string
+  /api/v1/users/restore-all:
+    put:
+      summary: 'Restore all users from storage'
+      operationId: restoreAllUsersFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Users
+      security: []
+  '/api/v1/users/{id}/removeTrash':
+    put:
+      summary: 'Remove the specified user from trash'
+      operationId: removeTheSpecifiedUserFromTrash
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Users
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the user.'
+        example: molestiae
+        required: true
+        schema:
+          type: string
+  /api/v1/users/removeTrash-all:
+    put:
+      summary: 'Remove all users from trash'
+      operationId: removeAllUsersFromTrash
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Users
+      security: []
 tags:
   -
+    name: Companies
+    description: ''
+  -
     name: Endpoints
+    description: ''
+  -
+    name: Positions
+    description: .
+  -
+    name: Users
     description: ''

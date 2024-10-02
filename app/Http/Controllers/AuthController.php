@@ -15,7 +15,6 @@ class AuthController extends Controller
             'nickname' => 'required|string|max:255',
             'given_name' => 'required|string|max:255',
             'family_name' => 'required|string|max:255',
-            'company_id' => 'required|exists:companies,id',
             'user_type' => 'required|in:client,staff,applicant',
             'status' => 'required|in:active,unconfirmed,suspended,banned,unknown',
             'email' => 'required|email|unique:users',
