@@ -92,14 +92,14 @@ class PositionsController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @group Positions
      */
-    public function show(int $id)
+    public function show($id)
     {
         if (Gate::denies('read', Position::class)) {
             return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
         }
 
         try {
-            $position = Position::findOrFail($id);
+            $position = Position::findOrFail((int) $id);
             return ApiResponseClass::sendResponse(
                 $position, "A position retrieved successfully", 200
             );
@@ -122,15 +122,30 @@ class PositionsController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @group Positions
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, Position $position)
     {
         try {
-            $position = Position::findOrFail($id);
             if (Gate::denies('update', $position)) {
                 return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
             }
 
-            $position->update($request->all());
+            $validated = $request->validate([
+                'advertising_start_date' => 'required|date_format:Y-m-d',
+                'advertising_end_date' => 'required|date_format:Y-m-d',
+                'position_title' => 'required|string|max:255',
+                'position_description' => 'required|string|max:500',
+                'position_keywords' => 'nullable|string|max:255',
+                'minimum_salary' => 'required|numeric|min:0',
+                'maximum_salary' => 'required|numeric|min:0|gte:minimum_salary',
+                'salary_currency' => 'required|string|size:3',
+                'benefits' => 'nullable|string|max:500',
+                'requirements' => 'nullable|string|max:500',
+                'position_type' => 'required|in:permanent,contract,part-time,casual,internship',
+                'user_id' => 'exists:users,id',
+                'company_id' => 'exists:companies,id'
+            ]);
+
+            $position->update($validated);
             return ApiResponseClass::sendResponse(
                 $position, "Position's data has been updated successfully", 200
             );
@@ -148,10 +163,9 @@ class PositionsController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @group Positions
      */
-    public function destroy(int $id)
+    public function destroy(Position $position)
     {
         try{
-            $position = Position::findOrFail($id);
             if (Gate::denies('delete', $position)) {
                 return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
             }
@@ -191,6 +205,7 @@ class PositionsController extends Controller
             return ApiResponseClass::sendResponse(
                 $position, "A position has been restore successfully", 200
             );
+
         } catch (ModelNotFoundException $e) {
             return ApiResponseClass::sendResponse(
                 null, 'Position not found in trash', 404
@@ -215,13 +230,13 @@ class PositionsController extends Controller
         }
 
         try {
-            $positions = Position::onlyTrashed()->get();
+            $positions = Position::withTrashed()->get();
             foreach ($positions as $position) {
                 $position->restore();
             }
 
             return ApiResponseClass::sendResponse(
-                null, "All positions have been restore successfully", 200);
+                $positions, "All positions have been restored successfully", 200);
         } catch (\Exception $e) {
             return ApiResponseClass::sendResponse(
                 null, 'Failed to restore positions', 500

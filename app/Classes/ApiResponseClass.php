@@ -16,12 +16,10 @@ class ApiResponseClass
 
     public static function throw($e, $message = "Something went wrong...")
     {
-        Log::info($e);
-        throw new (
-            response()->json([
+        Log::error($e);
+        return response()->json([
                 'message' => $message,
-            ], 500)
-        );
+            ], 500);
     }
 
     public static function sendResponse($result, string $message, int $code = 200): JsonResponse

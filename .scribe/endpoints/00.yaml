@@ -27,7 +27,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"success":true,"message":"Positions retrieved successfully","data":[{"id":1,"advertising_start_date":"2020-10-10","advertising_end_date":"2020-12-12","position_title":"asldkm","position_description":"apsokd","position_keywords":"asd","minimum_salary":1000,"maximum_salary":5000,"salary_currency":"AUD","company_id":1,"user_id":1,"benefits":null,"requirements":null,"position_type":"contract","created_at":"2024-09-19T08:32:24.000000Z","updated_at":"2024-09-19T08:32:24.000000Z","deleted_at":null}]}'
+        content: '{"success":true,"message":"Positions retrieved successfully","data":[]}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -60,123 +60,8 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters:
-      advertising_start_date:
-        name: advertising_start_date
-        description: 'Must be a valid date in the format <code>Y-m-d</code>.'
-        required: true
-        example: '2024-09-19'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      advertising_end_date:
-        name: advertising_end_date
-        description: 'Must be a valid date in the format <code>Y-m-d</code>.'
-        required: true
-        example: '2024-09-19'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      position_title:
-        name: position_title
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: ryckmsbvubzoaqpzqo
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      position_description:
-        name: position_description
-        description: 'Must not be greater than 500 characters.'
-        required: true
-        example: qwmkqftbei
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      position_keywords:
-        name: position_keywords
-        description: 'Must not be greater than 255 characters.'
-        required: false
-        example: brdalrakvcwl
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      minimum_salary:
-        name: minimum_salary
-        description: 'Must be at least 0.'
-        required: true
-        example: 90
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      maximum_salary:
-        name: maximum_salary
-        description: 'Must be at least 0.'
-        required: true
-        example: 12
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      salary_currency:
-        name: salary_currency
-        description: 'Must be 3 characters.'
-        required: true
-        example: alp
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      benefits:
-        name: benefits
-        description: 'Must not be greater than 500 characters.'
-        required: false
-        example: zjlav
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      requirements:
-        name: requirements
-        description: 'Must not be greater than 500 characters.'
-        required: false
-        example: u
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      position_type:
-        name: position_type
-        description: ''
-        required: true
-        example: casual
-        type: string
-        enumValues:
-          - permanent
-          - contract
-          - part-time
-          - casual
-          - internship
-        exampleWasSpecified: false
-        custom: []
-    cleanBodyParameters:
-      advertising_start_date: '2024-09-19'
-      advertising_end_date: '2024-09-19'
-      position_title: ryckmsbvubzoaqpzqo
-      position_description: qwmkqftbei
-      position_keywords: brdalrakvcwl
-      minimum_salary: 90
-      maximum_salary: 12
-      salary_currency: alp
-      benefits: zjlav
-      requirements: u
-      position_type: casual
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses: []
     responseFields: []
@@ -206,13 +91,13 @@ endpoints:
         name: id
         description: 'The ID of the position.'
         required: true
-        example: 1
+        example: 2
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: 2
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -221,7 +106,7 @@ endpoints:
     responses:
       -
         status: 403
-        content: '{"success":true,"message":"Unauthorized","data":null}'
+        content: '{"success":false,"message":"Unauthorized","data":null}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -256,13 +141,13 @@ endpoints:
         name: id
         description: 'The ID of the position.'
         required: true
-        example: 1
+        example: 12
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: 12
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -296,13 +181,13 @@ endpoints:
         name: id
         description: 'The ID of the position.'
         required: true
-        example: 1
+        example: 7
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: 7
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -356,6 +241,36 @@ endpoints:
     custom: []
   -
     httpMethods:
+      - POST
+    uri: api/v1/positions
+    metadata:
+      groupName: Positions
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Store a newly created resource in storage.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
       - GET
     uri: 'api/v1/positions/{id}'
     metadata:
@@ -375,13 +290,13 @@ endpoints:
         name: id
         description: 'The ID of the position.'
         required: true
-        example: 1
+        example: 15
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: 15
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -405,153 +320,9 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - POST
-    uri: api/v1/positions
-    metadata:
-      groupName: Positions
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Store a newly created resource in storage.'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      advertising_start_date:
-        name: advertising_start_date
-        description: 'Must be a valid date in the format <code>Y-m-d</code>.'
-        required: true
-        example: '2024-09-19'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      advertising_end_date:
-        name: advertising_end_date
-        description: 'Must be a valid date in the format <code>Y-m-d</code>.'
-        required: true
-        example: '2024-09-19'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      position_title:
-        name: position_title
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: hrjwtpbxldun
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      position_description:
-        name: position_description
-        description: 'Must not be greater than 500 characters.'
-        required: true
-        example: v
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      position_keywords:
-        name: position_keywords
-        description: 'Must not be greater than 255 characters.'
-        required: false
-        example: dkyzdcknysqmoflhsotrpo
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      minimum_salary:
-        name: minimum_salary
-        description: 'Must be at least 0.'
-        required: true
-        example: 31
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      maximum_salary:
-        name: maximum_salary
-        description: 'Must be at least 0.'
-        required: true
-        example: 30
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      salary_currency:
-        name: salary_currency
-        description: 'Must be 3 characters.'
-        required: true
-        example: tys
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      benefits:
-        name: benefits
-        description: 'Must not be greater than 500 characters.'
-        required: false
-        example: noyptq
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      requirements:
-        name: requirements
-        description: 'Must not be greater than 500 characters.'
-        required: false
-        example: yvnyvdjllpshnhkl
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      position_type:
-        name: position_type
-        description: ''
-        required: true
-        example: permanent
-        type: string
-        enumValues:
-          - permanent
-          - contract
-          - part-time
-          - casual
-          - internship
-        exampleWasSpecified: false
-        custom: []
-    cleanBodyParameters:
-      advertising_start_date: '2024-09-19'
-      advertising_end_date: '2024-09-19'
-      position_title: hrjwtpbxldun
-      position_description: v
-      position_keywords: dkyzdcknysqmoflhsotrpo
-      minimum_salary: 31
-      maximum_salary: 30
-      salary_currency: tys
-      benefits: noyptq
-      requirements: yvnyvdjllpshnhkl
-      position_type: permanent
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
       - PUT
-    uri: 'api/v1/positions/{id}/update'
+      - PATCH
+    uri: 'api/v1/positions/{id}'
     metadata:
       groupName: Positions
       groupDescription: ''
@@ -569,13 +340,13 @@ endpoints:
         name: id
         description: 'The ID of the position.'
         required: true
-        example: 1
+        example: 14
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: 14
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -591,7 +362,7 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/v1/positions/{id}/delete'
+    uri: 'api/v1/positions/{id}'
     metadata:
       groupName: Positions
       groupDescription: ''
@@ -609,43 +380,13 @@ endpoints:
         name: id
         description: 'The ID of the position.'
         required: true
-        example: 1
+        example: 12
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      id: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - DELETE
-    uri: api/v1/positions/delete-all
-    metadata:
-      groupName: Positions
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Permanently delete all resources from storage.'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
+      id: 12
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -730,7 +471,7 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - PUT
+      - DELETE
     uri: 'api/v1/positions/{id}/removeTrash'
     metadata:
       groupName: Positions
@@ -749,13 +490,13 @@ endpoints:
         name: id
         description: 'The ID of the position.'
         required: true
-        example: 1
+        example: 7
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: 7
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -770,7 +511,7 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - PUT
+      - DELETE
     uri: api/v1/positions/removeTrash-all
     metadata:
       groupName: Positions

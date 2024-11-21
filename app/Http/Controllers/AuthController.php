@@ -9,9 +9,10 @@ use Nette\Schema\ValidationException;
 
 class AuthController extends Controller
 {
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
 
-        $fields= $request->validate([
+        $fields = $request->validate([
             'nickname' => 'required|string|max:255',
             'given_name' => 'required|string|max:255',
             'family_name' => 'required|string|max:255',
@@ -21,7 +22,7 @@ class AuthController extends Controller
             'password' => 'required|confirmed'
         ]);
 
-        if($fields['user_type'] === 'client' && $fields['user_type'] === 'applicant') {
+        if ($fields['user_type'] === 'client' && $fields['user_type'] === 'applicant') {
             throw ValidationException::withMessages([
                 'user_type' => 'A user cannot be both client and applicant.',
             ]);
@@ -39,7 +40,8 @@ class AuthController extends Controller
         ];
     }
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
 
         $request->validate([
             'email' => 'required|email|exists:users',
@@ -61,7 +63,8 @@ class AuthController extends Controller
         ];
     }
 
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         $request->user()->currentAccessToken()->delete();
 
         return [

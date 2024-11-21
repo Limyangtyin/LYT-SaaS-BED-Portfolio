@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "8dd40b08-28c4-4f2f-9f7a-37c1a20e0391",
+        "_postman_id": "120dd6a8-a9ab-4f5e-8f8c-1f6c5377c1c0",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -27,62 +27,6 @@
                             "path": "api\/v1\/companies",
                             "query": [],
                             "raw": "{{baseUrl}}\/api\/v1\/companies"
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": [
-                        {
-                            "header": [
-                                {
-                                    "key": "cache-control",
-                                    "value": "no-cache, private"
-                                },
-                                {
-                                    "key": "content-type",
-                                    "value": "application\/json"
-                                },
-                                {
-                                    "key": "access-control-allow-origin",
-                                    "value": "*"
-                                }
-                            ],
-                            "code": 401,
-                            "body": "{\"message\":\"Unauthenticated.\"}",
-                            "name": ""
-                        }
-                    ]
-                },
-                {
-                    "name": "Display the specified resource.",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/companies\/:id",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/companies\/:id",
-                            "variable": [
-                                {
-                                    "id": "id",
-                                    "key": "id",
-                                    "value": "perspiciatis",
-                                    "description": "The ID of the company."
-                                }
-                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -143,10 +87,7 @@
                                 "value": "application\/json"
                             }
                         ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"name\":\"cwgeqbraoxkhbyjkudlnnq\",\"city\":\"qtaktkophlh\",\"state\":\"e\",\"country\":\"mwmawjeaagqdnibm\",\"logo\":\"smqhpqwuaywdykkh\"}"
-                        },
+                        "body": null,
                         "description": "",
                         "auth": {
                             "type": "noauth"
@@ -155,18 +96,74 @@
                     "response": []
                 },
                 {
-                    "name": "Update the specified resource in storage.",
+                    "name": "Display the specified resource.",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/companies\/:id\/update",
+                            "path": "api\/v1\/companies\/:id",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/companies\/:id\/update",
+                            "raw": "{{baseUrl}}\/api\/v1\/companies\/:id",
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "facilis",
+                                    "value": "consequatur",
+                                    "description": "The ID of the company."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update Company",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/companies\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/companies\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "numquam",
                                     "description": "The ID of the company."
                                 }
                             ]
@@ -183,7 +180,7 @@
                             }
                         ],
                         "body": null,
-                        "description": "",
+                        "description": "Update the specified resource in storage.",
                         "auth": {
                             "type": "noauth"
                         }
@@ -195,45 +192,17 @@
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/companies\/:id\/delete",
+                            "path": "api\/v1\/companies\/:id",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/companies\/:id\/delete",
+                            "raw": "{{baseUrl}}\/api\/v1\/companies\/:id",
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "numquam",
+                                    "value": "est",
                                     "description": "The ID of the company."
                                 }
                             ]
-                        },
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Permanently delete all resources from storage",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/companies\/delete-all",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/companies\/delete-all"
                         },
                         "method": "DELETE",
                         "header": [
@@ -266,7 +235,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "molestiae",
+                                    "value": "quisquam",
                                     "description": "The ID of the company."
                                 }
                             ]
@@ -330,12 +299,12 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "omnis",
+                                    "value": "autem",
                                     "description": "The ID of the company."
                                 }
                             ]
                         },
-                        "method": "PUT",
+                        "method": "DELETE",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -363,7 +332,7 @@
                             "query": [],
                             "raw": "{{baseUrl}}\/api\/v1\/companies\/removeTrash-all"
                         },
-                        "method": "PUT",
+                        "method": "DELETE",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -410,7 +379,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"nickname\":\"rocoablehniclhygwoqqx\",\"given_name\":\"biackrlcs\",\"family_name\":\"ilvosqhs\",\"user_type\":\"applicant\",\"status\":\"active\",\"email\":\"kaitlin72@example.net\",\"password\":\"repellendus\"}"
+                            "raw": "{\"nickname\":\"txtazkggcclttb\",\"given_name\":\"tffsepzkvkmgyb\",\"family_name\":\"emshzbweurspjyhki\",\"user_type\":\"applicant\",\"status\":\"unknown\",\"email\":\"alize63@example.net\",\"password\":\"aut\"}"
                         },
                         "description": "",
                         "auth": {
@@ -441,7 +410,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"patsy.stark@example.com\",\"password\":\"repellat\"}"
+                            "raw": "{\"email\":\"tierra.hudson@example.com\",\"password\":\"aut\"}"
                         },
                         "description": "",
                         "auth": {
@@ -527,7 +496,7 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "{\"success\":true,\"message\":\"Positions retrieved successfully\",\"data\":[{\"id\":1,\"advertising_start_date\":\"2020-10-10\",\"advertising_end_date\":\"2020-12-12\",\"position_title\":\"asldkm\",\"position_description\":\"apsokd\",\"position_keywords\":\"asd\",\"minimum_salary\":1000,\"maximum_salary\":5000,\"salary_currency\":\"AUD\",\"company_id\":1,\"user_id\":1,\"benefits\":null,\"requirements\":null,\"position_type\":\"contract\",\"created_at\":\"2024-09-19T08:32:24.000000Z\",\"updated_at\":\"2024-09-19T08:32:24.000000Z\",\"deleted_at\":null}]}",
+                            "body": "{\"success\":true,\"message\":\"Positions retrieved successfully\",\"data\":[]}",
                             "name": ""
                         }
                     ]
@@ -552,10 +521,7 @@
                                 "value": "application\/json"
                             }
                         ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"advertising_start_date\":\"2024-09-19\",\"advertising_end_date\":\"2024-09-19\",\"position_title\":\"ryckmsbvubzoaqpzqo\",\"position_description\":\"qwmkqftbei\",\"position_keywords\":\"brdalrakvcwl\",\"minimum_salary\":90,\"maximum_salary\":12,\"salary_currency\":\"alp\",\"benefits\":\"zjlav\",\"requirements\":\"u\",\"position_type\":\"casual\"}"
-                        },
+                        "body": null,
                         "description": "",
                         "auth": {
                             "type": "noauth"
@@ -575,7 +541,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "1",
+                                    "value": "2",
                                     "description": "The ID of the position."
                                 }
                             ]
@@ -614,7 +580,7 @@
                                 }
                             ],
                             "code": 403,
-                            "body": "{\"success\":true,\"message\":\"Unauthorized\",\"data\":null}",
+                            "body": "{\"success\":false,\"message\":\"Unauthorized\",\"data\":null}",
                             "name": ""
                         }
                     ]
@@ -631,7 +597,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "1",
+                                    "value": "12",
                                     "description": "The ID of the position."
                                 }
                             ]
@@ -667,7 +633,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "1",
+                                    "value": "7",
                                     "description": "The ID of the position."
                                 }
                             ]
@@ -740,6 +706,34 @@
                     ]
                 },
                 {
+                    "name": "Store a newly created resource in storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/positions",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/positions"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
                     "name": "Display the specified resource.",
                     "request": {
                         "url": {
@@ -751,7 +745,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "1",
+                                    "value": "15",
                                     "description": "The ID of the position."
                                 }
                             ]
@@ -796,49 +790,18 @@
                     ]
                 },
                 {
-                    "name": "Store a newly created resource in storage.",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/positions",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/positions"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"advertising_start_date\":\"2024-09-19\",\"advertising_end_date\":\"2024-09-19\",\"position_title\":\"hrjwtpbxldun\",\"position_description\":\"v\",\"position_keywords\":\"dkyzdcknysqmoflhsotrpo\",\"minimum_salary\":31,\"maximum_salary\":30,\"salary_currency\":\"tys\",\"benefits\":\"noyptq\",\"requirements\":\"yvnyvdjllpshnhkl\",\"position_type\":\"permanent\"}"
-                        },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
                     "name": "Update the specified resource in storage.",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/positions\/:id\/update",
+                            "path": "api\/v1\/positions\/:id",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/positions\/:id\/update",
+                            "raw": "{{baseUrl}}\/api\/v1\/positions\/:id",
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "1",
+                                    "value": "14",
                                     "description": "The ID of the position."
                                 }
                             ]
@@ -867,45 +830,17 @@
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/positions\/:id\/delete",
+                            "path": "api\/v1\/positions\/:id",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/positions\/:id\/delete",
+                            "raw": "{{baseUrl}}\/api\/v1\/positions\/:id",
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "1",
+                                    "value": "12",
                                     "description": "The ID of the position."
                                 }
                             ]
-                        },
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Permanently delete all resources from storage.",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/positions\/delete-all",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/positions\/delete-all"
                         },
                         "method": "DELETE",
                         "header": [
@@ -1002,12 +937,12 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "1",
+                                    "value": "7",
                                     "description": "The ID of the position."
                                 }
                             ]
                         },
-                        "method": "PUT",
+                        "method": "DELETE",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -1035,7 +970,7 @@
                             "query": [],
                             "raw": "{{baseUrl}}\/api\/v1\/positions\/removeTrash-all"
                         },
-                        "method": "PUT",
+                        "method": "DELETE",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -1109,6 +1044,34 @@
                     ]
                 },
                 {
+                    "name": "Store a newly created resource in storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/users",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/users"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
                     "name": "Display the specified resource.",
                     "request": {
                         "url": {
@@ -1120,7 +1083,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "beatae",
+                                    "value": "vel",
                                     "description": "The ID of the user."
                                 }
                             ]
@@ -1165,49 +1128,18 @@
                     ]
                 },
                 {
-                    "name": "Store a newly created resource in storage.",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/users",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/users"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"nickname\":\"xgstkpre\",\"given_name\":\"rxahyiqzrwqljjkd\",\"family_name\":\"sc\",\"email\":\"gussie.smitham@example.net\",\"user_type\":\"staff\",\"status\":\"active\",\"password\":\"deserunt\"}"
-                        },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
                     "name": "Update the specified resource in storage.",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/users\/:id\/update",
+                            "path": "api\/v1\/users\/:id",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/users\/:id\/update",
+                            "raw": "{{baseUrl}}\/api\/v1\/users\/:id",
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "inventore",
+                                    "value": "ea",
                                     "description": "The ID of the user."
                                 }
                             ]
@@ -1236,45 +1168,17 @@
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/users\/:id\/delete",
+                            "path": "api\/v1\/users\/:id",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/users\/:id\/delete",
+                            "raw": "{{baseUrl}}\/api\/v1\/users\/:id",
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "voluptas",
+                                    "value": "esse",
                                     "description": "The ID of the user."
                                 }
                             ]
-                        },
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Remove all users from storage.",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/users\/delete-all",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/users\/delete-all"
                         },
                         "method": "DELETE",
                         "header": [
@@ -1307,7 +1211,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "voluptatem",
+                                    "value": "sapiente",
                                     "description": "The ID of the user."
                                 }
                             ]
@@ -1371,12 +1275,12 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "molestiae",
+                                    "value": "recusandae",
                                     "description": "The ID of the user."
                                 }
                             ]
                         },
-                        "method": "PUT",
+                        "method": "DELETE",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -1404,7 +1308,7 @@
                             "query": [],
                             "raw": "{{baseUrl}}\/api\/v1\/users\/removeTrash-all"
                         },
-                        "method": "PUT",
+                        "method": "DELETE",
                         "header": [
                             {
                                 "key": "Content-Type",

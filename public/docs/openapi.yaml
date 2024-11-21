@@ -37,38 +37,6 @@ paths:
       responses: {  }
       tags:
         - Companies
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: cwgeqbraoxkhbyjkudlnnq
-                city:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: qtaktkophlh
-                state:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: e
-                country:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: mwmawjeaagqdnibm
-                logo:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: smqhpqwuaywdykkh
-              required:
-                - name
-                - city
-                - state
-                - country
       security: []
   '/api/v1/companies/{id}':
     get:
@@ -92,35 +60,15 @@ paths:
       tags:
         - Companies
       security: []
-    parameters:
-      -
-        in: path
-        name: id
-        description: 'The ID of the company.'
-        example: perspiciatis
-        required: true
-        schema:
-          type: string
-  '/api/v1/companies/{id}/update':
     put:
-      summary: 'Update the specified resource in storage.'
-      operationId: updateTheSpecifiedResourceInStorage
-      description: ''
+      summary: 'Update Company'
+      operationId: updateCompany
+      description: 'Update the specified resource in storage.'
       parameters: []
       responses: {  }
       tags:
         - Companies
       security: []
-    parameters:
-      -
-        in: path
-        name: id
-        description: 'The ID of the company.'
-        example: facilis
-        required: true
-        schema:
-          type: string
-  '/api/v1/companies/{id}/delete':
     delete:
       summary: 'Remove the specified resource from storage.'
       operationId: removeTheSpecifiedResourceFromStorage
@@ -135,20 +83,10 @@ paths:
         in: path
         name: id
         description: 'The ID of the company.'
-        example: numquam
+        example: consequatur
         required: true
         schema:
           type: string
-  /api/v1/companies/delete-all:
-    delete:
-      summary: 'Permanently delete all resources from storage'
-      operationId: permanentlyDeleteAllResourcesFromStorage
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Companies
-      security: []
   '/api/v1/companies/{id}/restore':
     put:
       summary: 'Restore the specified resource from storage.'
@@ -164,7 +102,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the company.'
-        example: molestiae
+        example: quisquam
         required: true
         schema:
           type: string
@@ -179,7 +117,7 @@ paths:
         - Companies
       security: []
   '/api/v1/companies/{id}/removeTrash':
-    put:
+    delete:
       summary: 'Permanently delete the specified resource from trash'
       operationId: permanentlyDeleteTheSpecifiedResourceFromTrash
       description: ''
@@ -193,12 +131,12 @@ paths:
         in: path
         name: id
         description: 'The ID of the company.'
-        example: omnis
+        example: autem
         required: true
         schema:
           type: string
   /api/v1/companies/removeTrash-all:
-    put:
+    delete:
       summary: 'Permanently delete all resource from trash'
       operationId: permanentlyDeleteAllResourceFromTrash
       description: ''
@@ -226,15 +164,15 @@ paths:
                 nickname:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: rocoablehniclhygwoqqx
+                  example: txtazkggcclttb
                 given_name:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: biackrlcs
+                  example: tffsepzkvkmgyb
                 family_name:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: ilvosqhs
+                  example: emshzbweurspjyhki
                 user_type:
                   type: string
                   description: ''
@@ -246,7 +184,7 @@ paths:
                 status:
                   type: string
                   description: ''
-                  example: active
+                  example: unknown
                   enum:
                     - active
                     - unconfirmed
@@ -256,11 +194,11 @@ paths:
                 email:
                   type: string
                   description: 'Must be a valid email address.'
-                  example: kaitlin72@example.net
+                  example: alize63@example.net
                 password:
                   type: string
                   description: ''
-                  example: repellendus
+                  example: aut
               required:
                 - nickname
                 - given_name
@@ -289,11 +227,11 @@ paths:
                 email:
                   type: string
                   description: 'Must be a valid email address.'
-                  example: patsy.stark@example.com
+                  example: tierra.hudson@example.com
                 password:
                   type: string
                   description: ''
-                  example: repellat
+                  example: aut
               required:
                 - email
                 - password
@@ -324,25 +262,7 @@ paths:
                 example:
                   success: true
                   message: 'Positions retrieved successfully'
-                  data:
-                    -
-                      id: 1
-                      advertising_start_date: '2020-10-10'
-                      advertising_end_date: '2020-12-12'
-                      position_title: asldkm
-                      position_description: apsokd
-                      position_keywords: asd
-                      minimum_salary: 1000
-                      maximum_salary: 5000
-                      salary_currency: AUD
-                      company_id: 1
-                      user_id: 1
-                      benefits: null
-                      requirements: null
-                      position_type: contract
-                      created_at: '2024-09-19T08:32:24.000000Z'
-                      updated_at: '2024-09-19T08:32:24.000000Z'
-                      deleted_at: null
+                  data: []
                 properties:
                   success:
                     type: boolean
@@ -352,79 +272,7 @@ paths:
                     example: 'Positions retrieved successfully'
                   data:
                     type: array
-                    example:
-                      -
-                        id: 1
-                        advertising_start_date: '2020-10-10'
-                        advertising_end_date: '2020-12-12'
-                        position_title: asldkm
-                        position_description: apsokd
-                        position_keywords: asd
-                        minimum_salary: 1000
-                        maximum_salary: 5000
-                        salary_currency: AUD
-                        company_id: 1
-                        user_id: 1
-                        benefits: null
-                        requirements: null
-                        position_type: contract
-                        created_at: '2024-09-19T08:32:24.000000Z'
-                        updated_at: '2024-09-19T08:32:24.000000Z'
-                        deleted_at: null
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                          example: 1
-                        advertising_start_date:
-                          type: string
-                          example: '2020-10-10'
-                        advertising_end_date:
-                          type: string
-                          example: '2020-12-12'
-                        position_title:
-                          type: string
-                          example: asldkm
-                        position_description:
-                          type: string
-                          example: apsokd
-                        position_keywords:
-                          type: string
-                          example: asd
-                        minimum_salary:
-                          type: integer
-                          example: 1000
-                        maximum_salary:
-                          type: integer
-                          example: 5000
-                        salary_currency:
-                          type: string
-                          example: AUD
-                        company_id:
-                          type: integer
-                          example: 1
-                        user_id:
-                          type: integer
-                          example: 1
-                        benefits:
-                          type: string
-                          example: null
-                        requirements:
-                          type: string
-                          example: null
-                        position_type:
-                          type: string
-                          example: contract
-                        created_at:
-                          type: string
-                          example: '2024-09-19T08:32:24.000000Z'
-                        updated_at:
-                          type: string
-                          example: '2024-09-19T08:32:24.000000Z'
-                        deleted_at:
-                          type: string
-                          example: null
+                    example: []
       tags:
         - Positions
       security: []
@@ -436,72 +284,6 @@ paths:
       responses: {  }
       tags:
         - Positions
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                advertising_start_date:
-                  type: string
-                  description: 'Must be a valid date in the format <code>Y-m-d</code>.'
-                  example: '2024-09-19'
-                advertising_end_date:
-                  type: string
-                  description: 'Must be a valid date in the format <code>Y-m-d</code>.'
-                  example: '2024-09-19'
-                position_title:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: ryckmsbvubzoaqpzqo
-                position_description:
-                  type: string
-                  description: 'Must not be greater than 500 characters.'
-                  example: qwmkqftbei
-                position_keywords:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: brdalrakvcwl
-                minimum_salary:
-                  type: number
-                  description: 'Must be at least 0.'
-                  example: 90
-                maximum_salary:
-                  type: number
-                  description: 'Must be at least 0.'
-                  example: 12
-                salary_currency:
-                  type: string
-                  description: 'Must be 3 characters.'
-                  example: alp
-                benefits:
-                  type: string
-                  description: 'Must not be greater than 500 characters.'
-                  example: zjlav
-                requirements:
-                  type: string
-                  description: 'Must not be greater than 500 characters.'
-                  example: u
-                position_type:
-                  type: string
-                  description: ''
-                  example: casual
-                  enum:
-                    - permanent
-                    - contract
-                    - part-time
-                    - casual
-                    - internship
-              required:
-                - advertising_start_date
-                - advertising_end_date
-                - position_title
-                - position_description
-                - minimum_salary
-                - maximum_salary
-                - salary_currency
-                - position_type
       security: []
   '/api/positions/{id}':
     get:
@@ -517,13 +299,13 @@ paths:
               schema:
                 type: object
                 example:
-                  success: true
+                  success: false
                   message: Unauthorized
                   data: null
                 properties:
                   success:
                     type: boolean
-                    example: true
+                    example: false
                   message:
                     type: string
                     example: Unauthorized
@@ -556,7 +338,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the position.'
-        example: 1
+        example: 2
         required: true
         schema:
           type: integer
@@ -590,72 +372,6 @@ paths:
       responses: {  }
       tags:
         - Positions
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                advertising_start_date:
-                  type: string
-                  description: 'Must be a valid date in the format <code>Y-m-d</code>.'
-                  example: '2024-09-19'
-                advertising_end_date:
-                  type: string
-                  description: 'Must be a valid date in the format <code>Y-m-d</code>.'
-                  example: '2024-09-19'
-                position_title:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: hrjwtpbxldun
-                position_description:
-                  type: string
-                  description: 'Must not be greater than 500 characters.'
-                  example: v
-                position_keywords:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: dkyzdcknysqmoflhsotrpo
-                minimum_salary:
-                  type: number
-                  description: 'Must be at least 0.'
-                  example: 31
-                maximum_salary:
-                  type: number
-                  description: 'Must be at least 0.'
-                  example: 30
-                salary_currency:
-                  type: string
-                  description: 'Must be 3 characters.'
-                  example: tys
-                benefits:
-                  type: string
-                  description: 'Must not be greater than 500 characters.'
-                  example: noyptq
-                requirements:
-                  type: string
-                  description: 'Must not be greater than 500 characters.'
-                  example: yvnyvdjllpshnhkl
-                position_type:
-                  type: string
-                  description: ''
-                  example: permanent
-                  enum:
-                    - permanent
-                    - contract
-                    - part-time
-                    - casual
-                    - internship
-              required:
-                - advertising_start_date
-                - advertising_end_date
-                - position_title
-                - position_description
-                - minimum_salary
-                - maximum_salary
-                - salary_currency
-                - position_type
       security: []
   '/api/v1/positions/{id}':
     get:
@@ -679,16 +395,6 @@ paths:
       tags:
         - Positions
       security: []
-    parameters:
-      -
-        in: path
-        name: id
-        description: 'The ID of the position.'
-        example: 1
-        required: true
-        schema:
-          type: integer
-  '/api/v1/positions/{id}/update':
     put:
       summary: 'Update the specified resource in storage.'
       operationId: updateTheSpecifiedResourceInStorage
@@ -698,16 +404,6 @@ paths:
       tags:
         - Positions
       security: []
-    parameters:
-      -
-        in: path
-        name: id
-        description: 'The ID of the position.'
-        example: 1
-        required: true
-        schema:
-          type: integer
-  '/api/v1/positions/{id}/delete':
     delete:
       summary: 'Remove the specified resource from storage.'
       operationId: removeTheSpecifiedResourceFromStorage
@@ -722,20 +418,10 @@ paths:
         in: path
         name: id
         description: 'The ID of the position.'
-        example: 1
+        example: 15
         required: true
         schema:
           type: integer
-  /api/v1/positions/delete-all:
-    delete:
-      summary: 'Permanently delete all resources from storage.'
-      operationId: permanentlyDeleteAllResourcesFromStorage
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Positions
-      security: []
   '/api/v1/positions/{id}/restore':
     put:
       summary: 'Restore the specified resource from storage.'
@@ -766,7 +452,7 @@ paths:
         - Positions
       security: []
   '/api/v1/positions/{id}/removeTrash':
-    put:
+    delete:
       summary: 'Permanently delete the specified resource from trash.'
       operationId: permanentlyDeleteTheSpecifiedResourceFromTrash
       description: ''
@@ -780,12 +466,12 @@ paths:
         in: path
         name: id
         description: 'The ID of the position.'
-        example: 1
+        example: 7
         required: true
         schema:
           type: integer
   /api/v1/positions/removeTrash-all:
-    put:
+    delete:
       summary: 'Permanently delete all resources from trash.'
       operationId: permanentlyDeleteAllResourcesFromTrash
       description: ''
@@ -824,59 +510,6 @@ paths:
       responses: {  }
       tags:
         - Users
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                nickname:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: xgstkpre
-                given_name:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: rxahyiqzrwqljjkd
-                family_name:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: sc
-                email:
-                  type: string
-                  description: 'Must not be greater than 500 characters.'
-                  example: gussie.smitham@example.net
-                user_type:
-                  type: string
-                  description: ''
-                  example: staff
-                  enum:
-                    - client
-                    - staff
-                    - applicant
-                status:
-                  type: string
-                  description: ''
-                  example: active
-                  enum:
-                    - active
-                    - unconfirmed
-                    - suspended
-                    - banned
-                    - unknown
-                password:
-                  type: string
-                  description: ''
-                  example: deserunt
-              required:
-                - nickname
-                - given_name
-                - family_name
-                - email
-                - user_type
-                - status
-                - password
       security: []
   '/api/v1/users/{id}':
     get:
@@ -900,16 +533,6 @@ paths:
       tags:
         - Users
       security: []
-    parameters:
-      -
-        in: path
-        name: id
-        description: 'The ID of the user.'
-        example: beatae
-        required: true
-        schema:
-          type: string
-  '/api/v1/users/{id}/update':
     put:
       summary: 'Update the specified resource in storage.'
       operationId: updateTheSpecifiedResourceInStorage
@@ -919,16 +542,6 @@ paths:
       tags:
         - Users
       security: []
-    parameters:
-      -
-        in: path
-        name: id
-        description: 'The ID of the user.'
-        example: inventore
-        required: true
-        schema:
-          type: string
-  '/api/v1/users/{id}/delete':
     delete:
       summary: 'Remove the specified resource from storage.'
       operationId: removeTheSpecifiedResourceFromStorage
@@ -943,20 +556,10 @@ paths:
         in: path
         name: id
         description: 'The ID of the user.'
-        example: voluptas
+        example: vel
         required: true
         schema:
           type: string
-  /api/v1/users/delete-all:
-    delete:
-      summary: 'Remove all users from storage.'
-      operationId: removeAllUsersFromStorage
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Users
-      security: []
   '/api/v1/users/{id}/restore':
     put:
       summary: 'Restore the specified resource from storage.'
@@ -972,7 +575,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the user.'
-        example: voluptatem
+        example: sapiente
         required: true
         schema:
           type: string
@@ -987,7 +590,7 @@ paths:
         - Users
       security: []
   '/api/v1/users/{id}/removeTrash':
-    put:
+    delete:
       summary: 'Remove the specified user from trash'
       operationId: removeTheSpecifiedUserFromTrash
       description: ''
@@ -1001,12 +604,12 @@ paths:
         in: path
         name: id
         description: 'The ID of the user.'
-        example: molestiae
+        example: recusandae
         required: true
         schema:
           type: string
   /api/v1/users/removeTrash-all:
-    put:
+    delete:
       summary: 'Remove all users from trash'
       operationId: removeAllUsersFromTrash
       description: ''

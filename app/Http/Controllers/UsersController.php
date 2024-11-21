@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -53,11 +54,14 @@ class UsersController extends Controller
                 'nickname' => 'required|string|max:255',
                 'given_name' => 'required|string|max:255',
                 'family_name' => 'required|string|max:255',
-                'email' => 'required|string|max:500',
-                'user_type' => 'required|in:client,staff,applicant',
+                'email' => 'required|string|email|max:500',
+                'company_id' => 'nullable|exists:companies,id',
+                'user_type' => 'required|in:client,staff,applicant,administrator,super-user',
                 'status' => 'required|in:active,unconfirmed,suspended,banned,unknown',
-                'password' => 'required'
+                'password' => 'required|string|min:8'
             ]);
+
+            $validated['password'] = Hash::make($validated['password']);
 
             $user = User::create($validated);
             return ApiResponseClass::sendResponse(
@@ -81,11 +85,11 @@ class UsersController extends Controller
     {
         try {
             $user = User::findOrFail($id);
-            if (Gate::denies('read', User::class)) {
+            if (Gate::denies('read', $user)) {
                 return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
             }
             return ApiResponseClass::sendResponse(
-                $user, "A user retrieved successfully",
+                $user, "A user retrieved successfully", 200
             );
         } catch (ModelNotFoundException $e) {
             return ApiResponseClass::sendResponse(
@@ -225,12 +229,14 @@ class UsersController extends Controller
      */
     public function removeFromTrash(int $id)
     {
-        if (Gate::denies('trash', User::class)) {
-            return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
-        }
+
 
         try {
             $user = User::onlyTrashed()->findOrFail($id);
+
+            if (Gate::denies('trash', User::class)) {
+                return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
+            }
             $user->forceDelete();
             return ApiResponseClass::sendResponse(
                 null, "The user has been permanently deleted from trash", 200
@@ -272,16 +278,4 @@ class UsersController extends Controller
             );
         }
     }
-
-//    public function promoteToAdmin(int $id)
-//    {
-//        $user = User::findOrFail($id);
-//        if (Gate::denies('promote', $user)) {
-//            return ApiResponseClass::sendResponse(null, 'Unauthorized', 403);
-//        }
-//
-//        $user->user_type = 'administrator';
-//        $user->save();
-//        return ApiResponseClass::sendResponse(null, 'User promoted to admin successfully');
-//    }
 }

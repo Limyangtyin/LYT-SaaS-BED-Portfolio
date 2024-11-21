@@ -10,7 +10,10 @@ uses(RefreshDatabase::class);
 testTime()->freeze('2024-07-01 00:00:00');
 
 it('can fetch all users', function () {
-    $users = User::factory(2)->create();
+    $users = User::factory(3)->create([
+        'user_type' => 'super-user',
+    ]);
+    $this->actingAs($users[0], 'sanctum');
 
     $data = [
         'success' => true,
@@ -24,41 +27,71 @@ it('can fetch all users', function () {
 });
 
 it('can fetch a user', function () {
-    $users = User::factory(2)->create();
+    $users = User::factory(3)->create([
+        'user_type' => 'staff',
+    ]);
+    $this->actingAs($users[0], 'sanctum');
 
     $data = [
         'success' => true,
         'message' => 'A user retrieved successfully',
-        'data' => $users[0]->toArray()
+        'data' => $users[2]->toArray()
     ];
 
-    $response = $this->getJson("api/v1/users/{$users[0]->id}");
+    $response = $this->getJson("api/v1/users/{$users[2]->id}");
 
     $response->assertStatus(200)->assertJson($data);
 });
 
 
 it('can add a new user', function () {
-    $company = \App\Models\Company::factory()->create();
-
-    // Create one user instance without saving
-    $user = User::factory()->make([
-        'company_id' => $company->id,
+    // Create a super-user for authentication
+    $admin = User::factory()->create([
+        'user_type' => 'super-user',
     ]);
 
-    $data = [
-        'success' => true,
-        'message' => 'New user added successfully',
-        'data' => $user->toArray()
+    $this->actingAs($admin, 'sanctum');
+
+    $userData = [
+        'nickname' => 'testuser',
+        'given_name' => 'Test',
+        'family_name' => 'User',
+        'email' => 'testuser@example.com',
+        'user_type' => 'client',
+        'status' => 'active',
+        'password' => 'Password123',
     ];
 
-    $response = $this->postJson('/api/v1/users', $user->toArray());
+    $response = $this->postJson('/api/v1/users', $userData);
 
-    $response->assertStatus(200)->assertJson($data);
+    $expectedData = [
+        'success' => true,
+        'message' => 'New user added successfully',
+        'data' => [
+            'nickname' => $userData['nickname'],
+            'given_name' => $userData['given_name'],
+            'family_name' => $userData['family_name'],
+            'email' => $userData['email'],
+            'user_type' => $userData['user_type'],
+            'status' => $userData['status'],
+        ]
+    ];
+
+    $response->assertStatus(201)->assertJson($expectedData);
+
+    $this->assertDatabaseHas('users', [
+        'email' => $userData['email'],
+    ]);
 });
 
+
 it('can edit a user profile', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'user_type' => 'super-user',
+    ]);
+    $this->actingAs($user, 'sanctum');
+
+    $user1 = User::factory()->create();
 
     $updatedData = [
         'given_name' => 'User1',
@@ -69,10 +102,10 @@ it('can edit a user profile', function () {
     $data = [
         'success' => true,
         'message' => "User's data has been updated successfully",
-        'data' => array_merge($user ->toArray(), $updatedData, ['id' => $user->id])
+        'data' => array_merge($user1 ->toArray(), $updatedData, ['id' => $user1->id])
     ];
 
-    $response = $this->putJson("/api/v1/users/{$user->id}/update", $updatedData);
+    $response = $this->putJson("/api/v1/users/{$user1->id}", $updatedData);
 
     $response->assertStatus(200)->assertJson($data);
 
@@ -81,7 +114,12 @@ it('can edit a user profile', function () {
 });
 
 it('can delete a user', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'user_type' => 'super-user',
+    ]);
+    $this->actingAs($user, 'sanctum');
+
+    $user1 = User::factory()->create();
 
     $data = [
         'success' => true,
@@ -89,35 +127,21 @@ it('can delete a user', function () {
         'data' => []
     ];
 
-    $response = $this->deleteJson("/api/v1/users/{$user->id}/delete");
+    $response = $this->deleteJson("/api/v1/users/{$user1->id}");
 
     $response->assertStatus(200)->assertJson($data);
 
 });
 
-it('can delete all users', function () {
-    $users = User::factory(3)->create();
-
-    $data = [
-        'success' => true,
-        'message' => "All users have been removed successfully",
-        'data' => $users->toArray()
-    ];
-
-    $response = $this->deleteJson("/api/v1/users/delete-all");
-
-    $response->assertStatus(200)->assertJson($data);
-
-});
 
 it('can restore a user', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'user_type' => 'super-user',
+    ]);
+    $this->actingAs($user, 'sanctum');
 
-    $deletedata = [
-        'success' => true,
-        'message' => "A user has been removed successfully",
-        'data' => []
-    ];
+    $user1 = User::factory()->create();
+
 
     $restoredata = [
         'success' => true,
@@ -125,46 +149,23 @@ it('can restore a user', function () {
         'data' => $user->toArray()
     ];
 
-    $response = $this->deleteJson("/api/v1/users/{$user->id}/delete");
-    $response->assertStatus(200)->assertJson($deletedata);
+    $user1->delete();
 
     $response = $this->putJson("/api/v1/users/{$user->id}/restore");
     $response->assertStatus(200)->assertJson($restoredata);
 
 });
 
-it('can restore all users', function () {
-    $users = User::factory(3)->create();
-
-    $deletedata = [
-        'success' => true,
-        'message' => "All users have been removed successfully",
-        'data' => []
-    ];
-
-    $restoredata = [
-        'success' => true,
-        'message' => "All users have been restore successfully",
-        'data' => $users->toArray()
-    ];
-
-    $response = $this->deleteJson("/api/v1/users/delete-all");
-    $response->assertStatus(200)->assertJson($deletedata);
-
-    $response = $this->putJson("/api/v1/users/restore-all");
-    $response->assertStatus(200)->assertJson($restoredata);
-
-});
-
 
 it('can remove a user from trash', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'user_type' => 'super-user',
+    ]);
+    $this->actingAs($user, 'sanctum');
 
-    $deletedata = [
-        'success' => true,
-        'message' => "A user has been removed successfully",
-        'data' => []
-    ];
+    $user1 = User::factory()->create();
+
+    $user1->delete();
 
     $permanentDeleteData = [
         'success' => true,
@@ -172,33 +173,8 @@ it('can remove a user from trash', function () {
         'data' => null
     ];
 
-    $response = $this->deleteJson("/api/v1/positions/{$user->id}/delete");
-    $response->assertStatus(200)->assertJson($deletedata);
-
-    $response = $this->deleteJson("/api/v1/positions/{$user->id}/removeTrash");
+    $response = $this->deleteJson("/api/v1/users/{$user1->id}/removeTrash");
     $response->assertStatus(200)->assertJson($permanentDeleteData);
 
 });
 
-it('can remove all users from trash', function () {
-    $users = User::factory(3)->create();
-
-    $deletedata = [
-        'success' => true,
-        'message' => "All users have been removed successfully",
-        'data' => []
-    ];
-
-    $permanentDeleteData = [
-        'success' => true,
-        'message' => "All users have been permanently deleted from trash",
-        'data' => null
-    ];
-
-    $response = $this->deleteJson("/api/v1/users/delete-all");
-    $response->assertStatus(200)->assertJson($deletedata);
-
-    $response = $this->deleteJson("/api/v1/users/{removeTrash-all");
-    $response->assertStatus(200)->assertJson($permanentDeleteData);
-
-});

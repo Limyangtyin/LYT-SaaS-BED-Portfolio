@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Position;
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -30,6 +31,7 @@ class PositionFactory extends Factory
             'maximum_salary' => $this->faker->randomFloat(2, 10000, 100000),
             'salary_currency' => $this->faker->currencyCode(),
             'company_id' => Company::factory(),
+            'user_id' => User::factory(),
             'benefits' => $this->faker->sentence(),
             'requirements' => $this->faker->sentence(),
             'position_type' => $this->faker->randomElement(['permanent', 'contract', 'part-time', 'casual', 'internship']),

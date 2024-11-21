@@ -24,9 +24,10 @@ class UserFactory extends Factory
             'given_name' => $this->faker->firstName(),
             'family_name' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
-            'company_id' => Company::factory(),
-            'user_type' => $this->faker->randomElement(['client', 'staff', 'applicant']),
+            'company_id' => null,
+            'user_type' => $this->faker->randomElement(['client', 'staff', 'applicant', 'administrator', 'super-user']),
             'status' => $this->faker->randomElement(['active', 'unconfirmed', 'suspended', 'banned', 'unknown']),
+            'password' => Hash::make('Password1')
         ];
     }
 }
